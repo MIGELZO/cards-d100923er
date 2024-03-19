@@ -1,7 +1,11 @@
+import { Box } from '@mui/material'
 import React from 'react'
+import Logo from './topNavBar/logo/Logo'
 
 export default function Header() {
   return (
-    <div>Header</div>
+    <Box>
+      <Logo/>
+    </Box>
   )
 }
