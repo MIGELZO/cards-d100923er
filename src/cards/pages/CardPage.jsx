@@ -11,7 +11,6 @@ export default function CardPage() {
     <div>
       <PageHeader title={title} subtitle={subtitle} />
       <Cards />
-      <Cards />
     </div>
   );
 }

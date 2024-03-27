@@ -1,27 +1,22 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import React from "react";
-import LogoIcon from "./LogoIcon";
+import NavBarLink from "../../../../routs/components/NavBarLink";
+import ROUTES from "../../../../routs/routsModel";
 
 export default function Logo() {
   return (
-    <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, padding: 1 }}>
-      <LogoIcon
-        sx={{
-          display: "inline-block",
-          width: 100,
-          height: 100,
-        }}
-      />
+    <NavBarLink to={ROUTES.ROOT}>
       <Typography
         variant="h4"
         sx={{
           fontFamily: "fantasy",
           mr: 2,
-          display: { xs: "none", sm: "inline" },
+          display: { xs: "none", md: "inline-flex" },
+          color: "#fff",
         }}
       >
         BCard
       </Typography>
-    </Box>
+    </NavBarLink>
   );
 }

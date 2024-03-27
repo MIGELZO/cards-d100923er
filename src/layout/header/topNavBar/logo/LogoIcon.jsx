@@ -1,13 +1,18 @@
-import { Avatar } from "@mui/material";
-import avatarImage from "../../../../assets/imgs/avatar.png";
+import { Avatar, IconButton } from "@mui/material";
 import React from "react";
+import NavBarLink from "../../../../routs/components/NavBarLink";
+import ROUTES from "../../../../routs/routsModel";
 
 export default function LogoIcon() {
   return (
-    <Avatar
-      alt="business icon"
-      src={avatarImage}
-      sx={{ border: "2px solid #DDEBF6", width: 40, height: 40 }}
-    />
+    <NavBarLink to={ROUTES.ROOT}>
+      <IconButton>
+        <Avatar
+          alt="business card icon"
+          src="/assets/imgs/avatar.png"
+          sx={{ border: "2px solid #DDEBF6", width: 40, height: 40 }}
+        />
+      </IconButton>
+    </NavBarLink>
   );
 }
