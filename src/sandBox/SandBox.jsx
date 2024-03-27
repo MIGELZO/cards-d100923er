@@ -9,6 +9,12 @@ export default function SendBox() {
       <AppBar position="sticky" color="transparent">
         <Toolbar>
           <NavItem to="counter" lable="Counter page" sx={{ color: "black" }} />
+          <NavItem
+            to="LifeCycle"
+            lable="Life Cycle"
+            sx={{ color: "black" }}
+          />
+          <NavItem to="countries" lable="Countries list" sx={{ color: "black" }} />
         </Toolbar>
       </AppBar>
 

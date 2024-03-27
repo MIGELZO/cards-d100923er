@@ -9,9 +9,10 @@ export default function LeftNavBar() {
   return (
     <Box>
       <LogoIcon />
-      <Logo/>
-      <NavItem to={ROUTES.ABOUT} lable={"About"}/>
-      <NavItem to={ROUTES.CARDS} lable={"Card"}/>
+      <Logo />
+      <NavItem to={ROUTES.ABOUT} lable={"About"} />
+      <NavItem to={ROUTES.CARDS} lable={"Card"} />
+      <NavItem to={ROUTES.SANDBOX} lable={"Sandbox"} />
     </Box>
   );
 }
