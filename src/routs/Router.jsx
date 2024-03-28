@@ -8,7 +8,7 @@ import CardDetailPage from "../cards/pages/CardDetailPage";
 import SendBox from "../sandBox/SandBox";
 import Counter from "../sandBox/Counter";
 import LifeCycle from "../sandBox/LifeCycle";
-import Countries from "../sandBox/Countries";
+import Countries from "../sandBox/countries/Countries";
 
 export default function Router() {
   return (

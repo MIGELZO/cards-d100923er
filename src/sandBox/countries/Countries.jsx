@@ -1,9 +1,14 @@
-import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import CountriesTable from "./CountriesTable";
 
 export default function Countries() {
   const [countriesList, setCountriesList] = useState([]);
+  const [effectTriger, setEffectTriger] = useState(0);
+  const refreshFunc = () => {
+    setCountriesList([]);
+    setEffectTriger((prev) => prev + 1);
+  };
 
   useEffect(() => {
     const getAllCountries = async () => {
@@ -25,19 +30,9 @@ export default function Countries() {
     //   };
 
     getAllCountries();
-  }, []);
+  }, [effectTriger]);
 
   return (
-    <div>
-      {countriesList.length === 0 ? (
-        <Typography>טוען...</Typography>
-      ) : (
-        countriesList.map((Country, index) => (
-          <Box key={index}>
-            <Typography>{Country.name.common}</Typography>
-          </Box>
-        ))
-      )}
-    </div>
+    <CountriesTable countriesList={countriesList} refreshFunc={refreshFunc} />
   );
 }
