@@ -11,23 +11,23 @@ export default function Countries() {
   };
 
   useEffect(() => {
-    const getAllCountries = async () => {
-      const response = await axios.get("https://restcountries.com/v3.1/all");
-      const data = response.data;
-      setCountriesList(data);
-    };
+  //   const getAllCountries = async () => {
+  //     const response = await axios.get("https://restcountries.com/v3.1/all");
+  //     const data = response.data;
+  //     setCountriesList(data);
+  //   };
 
     // הדמיה של קוד למניעת תקיעה של התוכנה במקרה של תקלה במשיכת הנתונים:
 
-    // const getAllCountries = async () => {
-    //     try {
-    //       const response = await axios.get("https://restcountries.com/v3.1/all1");
-    //       const data = response.data;
-    //       setCountriesList(data);
-    //     } catch (error) {
-    //       console.log("error ", error);
-    //     }
-    //   };
+    const getAllCountries = async () => {
+        try {
+          const response = await axios.get("https://restcountries.com/v3.1/all");
+          const data = response.data;
+          setCountriesList(data);
+        } catch (error) {
+          console.log("error ", error);
+        }
+      };
 
     getAllCountries();
   }, [effectTriger]);

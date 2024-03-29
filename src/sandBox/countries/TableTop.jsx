@@ -20,11 +20,7 @@ export default function TableTop({ countriesList, refreshFunc }) {
           <TableRow>
             <TableCell>Country name:</TableCell>
             <TableCell>
-              <Button
-                variant="contained"
-                onClick={() => {refreshFunc();
-                }}
-              >
+              <Button variant="contained" onClick={refreshFunc}>
                 Refrash list
               </Button>
             </TableCell>
