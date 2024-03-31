@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import ROUTES from "./routsModel";
-import CardPage from "../cards/pages/CardPage";
+import CardsPage from "../cards/pages/CardsPage";
 import AboutPage from "../pages/AboutPage";
 import ErrorPage from "../pages/ErrorPage";
 import CardDetailPage from "../cards/pages/CardDetailPage";
@@ -13,8 +13,8 @@ import Countries from "../sandBox/countries/Countries";
 export default function Router() {
   return (
     <Routes>
-      <Route path={ROUTES.ROOT} element={<CardPage />} />
-      <Route path={ROUTES.CARDS} element={<CardPage />} />
+      <Route path={ROUTES.ROOT} element={<CardsPage />} />
+      <Route path={ROUTES.CARDS} element={<CardsPage />} />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
       <Route path={ROUTES.CARD_INFO + "/:id"} element={<CardDetailPage />} />
       <Route path={ROUTES.SANDBOX} element={<SendBox />}>

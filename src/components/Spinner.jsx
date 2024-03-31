@@ -2,9 +2,7 @@ import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
-const Spinner = ({ color, size, height }) => {
-  console.log("SPINNER");
-
+const Spinner = ({ color = "primary", size = 40, height = "50vh" }) => {
   return (
     <Box
       sx={{

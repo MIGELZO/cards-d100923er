@@ -7,7 +7,7 @@ export default function Countries() {
   const [effectTriger, setEffectTriger] = useState(0);
   const refreshFunc = () => {
     setCountriesList([]);
-    setEffectTriger((prev) => prev + 1);
+    setEffectTriger((prev) => !prev);
   };
 
   useEffect(() => {
