@@ -1,4 +1,4 @@
-import { Avatar, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import PageHeader from "../../components/PageHeader";
 import { useParams } from "react-router-dom";
@@ -40,7 +40,6 @@ export default function CardDetailPage() {
           title="Card Details"
           subtitle="Here you can find all the details about specific card"
         />
-        <Avatar src={cardData.image.url} />
         <OneCardData cardData={cardData} />
       </Container>
     );

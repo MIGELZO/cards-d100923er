@@ -15,6 +15,7 @@ export default function SendBox() {
             sx={{ color: "black" }}
           />
           <NavItem to="countries" lable="Countries list" sx={{ color: "black" }} />
+          <NavItem to="form" lable="form example" sx={{ color: "black" }} />
         </Toolbar>
       </AppBar>
 

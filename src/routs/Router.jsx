@@ -9,6 +9,7 @@ import SendBox from "../sandBox/SandBox";
 import Counter from "../sandBox/Counter";
 import LifeCycle from "../sandBox/LifeCycle";
 import Countries from "../sandBox/countries/Countries";
+import FormExample from "../sandBox/FormExample";
 
 export default function Router() {
   return (
@@ -21,6 +22,7 @@ export default function Router() {
         <Route path="counter" element={<Counter />} />
         <Route path="LifeCycle" element={<LifeCycle />} />
         <Route path="countries" element={<Countries />} />
+        <Route path="form" element={<FormExample />} />
       </Route>
       <Route path="*" element={<ErrorPage />} />
     </Routes>
