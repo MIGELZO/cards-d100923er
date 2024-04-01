@@ -1,4 +1,4 @@
-import { AppBar, Container, Toolbar } from "@mui/material";
+import { AppBar, Container, Divider, Toolbar } from "@mui/material";
 import React from "react";
 import NavItem from "../routs/components/NavItem";
 import { Outlet } from "react-router-dom";
@@ -9,13 +9,22 @@ export default function SendBox() {
       <AppBar position="sticky" color="transparent">
         <Toolbar>
           <NavItem to="counter" lable="Counter page" sx={{ color: "black" }} />
+          <Divider orientation="vertical" variant="middle" flexItem />
+          <NavItem to="LifeCycle" lable="Life Cycle" sx={{ color: "black" }} />
+          <Divider orientation="vertical" variant="middle" flexItem />
           <NavItem
-            to="LifeCycle"
-            lable="Life Cycle"
+            to="countries"
+            lable="Countries list"
             sx={{ color: "black" }}
           />
-          <NavItem to="countries" lable="Countries list" sx={{ color: "black" }} />
+          <Divider orientation="vertical" variant="middle" flexItem />
           <NavItem to="form" lable="form example" sx={{ color: "black" }} />
+          <Divider orientation="vertical" variant="middle" flexItem />
+          <NavItem
+            to="ReSizedWindow"
+            lable="Resized Window"
+            sx={{ color: "black" }}
+          />
         </Toolbar>
       </AppBar>
 
