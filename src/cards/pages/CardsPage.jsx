@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PageHeader from "../../components/PageHeader";
 import CardsFeedBack from "../components/CardsFeedBack";
 import useCards from "../../hooks/useCards";
 
 export default function CardPage() {
 
-  const {isLoading, error, cardsList, handleCardDelete, handleCardLike} = useCards()
+  const {isLoading, error, cardsList, handleCardDelete, handleCardLike, getAllCards} = useCards()
+
+  useEffect(() => {   
+    getAllCards();
+  }, []);
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import PageHeader from "../../components/PageHeader";
 import { useParams } from "react-router-dom";
 import OneCardData from "../components/card/OneCardData";
@@ -9,7 +9,11 @@ import useCards from "../../hooks/useCards";
 
 export default function CardDetailPage() {
   const { id } = useParams();
-  const { cardData, isLoading, error } = useCards(id);
+  const { cardData, isLoading, error, getCardDetails } = useCards(id);
+
+  useEffect(() => {
+    getCardDetails();
+  }, [id]);
 
   if (isLoading) return <Spinner />;
   if (error) return <Error errorMessage={error} />;
