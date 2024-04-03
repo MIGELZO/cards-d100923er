@@ -5,14 +5,14 @@ import { useParams } from "react-router-dom";
 import OneCardData from "../components/card/OneCardData";
 import Spinner from "../../components/Spinner";
 import Error from "../../components/Error";
-import useCards from "../../hooks/useCards";
+import useCards from "../hooks/useCards";
 
 export default function CardDetailPage() {
   const { id } = useParams();
-  const { cardData, isLoading, error, getCardDetails } = useCards(id);
+  const { cardData, isLoading, error, getCardDetails } = useCards();
 
   useEffect(() => {
-    getCardDetails();
+    getCardDetails(id);
   }, [id]);
 
   if (isLoading) return <Spinner />;

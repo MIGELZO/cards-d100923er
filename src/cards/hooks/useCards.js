@@ -25,7 +25,7 @@ export default function useCards(id) {
   };
 
 
-  const getCardDetails = async () => {
+  const getCardDetails = async (id) => {
     try {
       setIsLoading(true);
       const response = await axios.get(
