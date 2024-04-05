@@ -25,6 +25,10 @@ export default function SendBox() {
             lable="Resized Window"
             sx={{ color: "black" }}
           />
+          <Divider orientation="vertical" variant="middle" flexItem />
+          <NavItem to="LogIn" lable="LogIn" sx={{ color: "black" }} />
+          <Divider orientation="vertical" variant="middle" flexItem />
+          <NavItem to="SignUp" lable="Sign up" sx={{ color: "black" }} />
         </Toolbar>
       </AppBar>
 

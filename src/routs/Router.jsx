@@ -11,6 +11,8 @@ import LifeCycle from "../sandBox/LifeCycle";
 import Countries from "../sandBox/countries/Countries";
 import FormExample from "../sandBox/FormExample";
 import ResizedWindow from "../sandBox/ResizedWindow";
+import LogIn from "../sandBox/LogIn";
+import SignUp from "../sandBox/SignUp";
 
 export default function Router() {
   return (
@@ -25,6 +27,8 @@ export default function Router() {
         <Route path="countries" element={<Countries />} />
         <Route path="form" element={<FormExample />} />
         <Route path="ResizedWindow" element={<ResizedWindow />} />
+        <Route path="LogIn" element={<LogIn />} />
+        <Route path="SignUp" element={<SignUp />} />
       </Route>
       <Route path="*" element={<ErrorPage />} />
     </Routes>
