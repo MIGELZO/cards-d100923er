@@ -35,7 +35,7 @@ export default function LogIn() {
 
   return (
     <Form
-      title={"log in"}
+      title="log in"
       onSubmit={onSubmit}
       onReset={handleReset}
       validateForm={validateForm}
@@ -45,14 +45,14 @@ export default function LogIn() {
         data={data}
         label={makeFirstLetterCapital("email")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.email}
       />
       <Input
         name={"password"}
         data={data}
         label={makeFirstLetterCapital("password")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.password}
       />
     </Form>
   );

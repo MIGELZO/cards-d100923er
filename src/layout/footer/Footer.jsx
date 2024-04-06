@@ -10,7 +10,7 @@ export default function Footer() {
 
   return (
     <Paper
-      sx={{ position: "sticky", bottom: 0, left: 0, right: 0 }}
+      sx={{ position: "sticky", bottom: 0, left: 0, right: 0, zIndex: 1 }}
       elevation={3}
     >
       <BottomNavigation showLabels>

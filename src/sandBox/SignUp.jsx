@@ -78,84 +78,84 @@ export default function SignUp() {
         data={data}
         label={makeFirstLetterCapital("first")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.first}
       />
       <Input
         name={"middle"}
         data={data}
         label={makeFirstLetterCapital("middle")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.middle}
       />
       <Input
         name={"last"}
         data={data}
         label={makeFirstLetterCapital("last")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.last}
       />
       <Input
         name={"phone"}
         data={data}
         label={makeFirstLetterCapital("phone")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.phone}
       />
       <Input
         name={"email"}
         data={data}
         label={makeFirstLetterCapital("email")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.email}
       />
       <Input
         name={"password"}
         data={data}
         label={makeFirstLetterCapital("password")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.password}
       />
       <Input
         name={"url"}
         data={data}
         label={makeFirstLetterCapital("url")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.password}
       />
       <Input
         name={"alt"}
         data={data}
         label={makeFirstLetterCapital("alt")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.alt}
       />
       <Input
         name={"state"}
         data={data}
         label={makeFirstLetterCapital("state")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.state}
       />
       <Input
         name={"country"}
         data={data}
         label={makeFirstLetterCapital("country")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.country}
       />
       <Input
         name={"city"}
         data={data}
         label={makeFirstLetterCapital("city")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.city}
       />
       <Input
         name={"street"}
         data={data}
         label={makeFirstLetterCapital("street")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.street}
       />
       <Input
         name={"houseNumber"}
@@ -163,7 +163,7 @@ export default function SignUp() {
         data={data}
         label={makeFirstLetterCapital("houseNumber")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.houseNumber}
       />
       <Input
         name={"zip"}
@@ -171,7 +171,7 @@ export default function SignUp() {
         data={data}
         label={makeFirstLetterCapital("zip")}
         onChange={handleChange}
-        // error={errors}
+        error={errors.zip}
       />
       <Input
         name={"isBusiness"}
@@ -179,7 +179,7 @@ export default function SignUp() {
         label={makeFirstLetterCapital("isBusiness")}
         onChange={handleChange}
         type="checkbox"
-        // error={errors}
+        error={errors.isBusiness}
       />
     </Form>
   );
