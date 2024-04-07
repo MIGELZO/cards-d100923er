@@ -25,9 +25,6 @@ export default function useForm(initialForm, schema, handleSubmit) {
         return obj;
       });
     }
-    console.log(name);
-    console.log(value);
-    console.log(Boolean(value));
     setData((prev) => ({
       ...prev,
       [name]: value,
