@@ -11,8 +11,9 @@ import LifeCycle from "../sandBox/LifeCycle";
 import Countries from "../sandBox/countries/Countries";
 import FormExample from "../sandBox/FormExample";
 import ResizedWindow from "../sandBox/ResizedWindow";
-import LogIn from "../sandBox/LogIn";
-import SignUp from "../sandBox/SignUp";
+import SignupPage from "../users/pages/SignUpPage";
+import LogInPage from "../users/pages/LogInPage";
+import ParentComponent from "../sandBox/optimization/ParentComponent";
 
 export default function Router() {
   return (
@@ -21,14 +22,15 @@ export default function Router() {
       <Route path={ROUTES.CARDS} element={<CardsPage />} />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
       <Route path={ROUTES.CARD_INFO + "/:id"} element={<CardDetailPage />} />
+      <Route path={ROUTES.SIGNUP} element={<SignupPage />} />
+      <Route path={ROUTES.LOGIN} element={<LogInPage />} />
       <Route path={ROUTES.SANDBOX} element={<SendBox />}>
         <Route path="counter" element={<Counter />} />
         <Route path="LifeCycle" element={<LifeCycle />} />
         <Route path="countries" element={<Countries />} />
         <Route path="form" element={<FormExample />} />
         <Route path="ResizedWindow" element={<ResizedWindow />} />
-        <Route path="LogIn" element={<LogIn />} />
-        <Route path="SignUp" element={<SignUp />} />
+        <Route path="optimization" element={<ParentComponent />} />
       </Route>
       <Route path="*" element={<ErrorPage />} />
     </Routes>
