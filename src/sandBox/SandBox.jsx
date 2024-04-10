@@ -32,6 +32,8 @@ export default function SendBox() {
             sx={{ color: "black" }}
           />
           <Divider orientation="vertical" variant="middle" flexItem />
+          <NavItem to="context" lable="context" sx={{ color: "black" }} />
+          <Divider orientation="vertical" variant="middle" flexItem />
         </Toolbar>
       </AppBar>
 

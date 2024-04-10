@@ -15,62 +15,68 @@ export default function useForm(initialForm, schema, handleSubmit) {
     [schema]
   );
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    const errorMessage = validateProperty(name, value);
-    if (errorMessage) {
-      setErrors((prev) => ({ ...prev, [name]: errorMessage }));
-    } else {
-      setErrors((prev) => {
-        let obj = { ...prev };
-        delete obj[name];
-        return obj;
-      });
-    }
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const handleChange = useCallback(
+    (event) => {
+      const name = event.target.name;
+      const value = event.target.value;
+      const errorMessage = validateProperty(name, value);
+      if (errorMessage) {
+        setErrors((prev) => ({ ...prev, [name]: errorMessage }));
+      } else {
+        setErrors((prev) => {
+          let obj = { ...prev };
+          delete obj[name];
+          return obj;
+        });
+      }
+      setData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    },
+    [validateProperty]
+  );
 
-  const handleChangeCheckBox = (event) => {
-    const name = event.target.name;
-    const value = event.target.checked;
-    const errorMessage = validateProperty(name, value);
-    if (errorMessage) {
-      setErrors((prev) => ({ ...prev, [name]: errorMessage }));
-    } else {
-      setErrors((prev) => {
-        let obj = { ...prev };
-        delete obj[name];
-        return obj;
-      });
-    }
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const handleChangeCheckBox = useCallback(
+    (event) => {
+      const name = event.target.name;
+      const value = event.target.checked;
+      const errorMessage = validateProperty(name, value);
+      if (errorMessage) {
+        setErrors((prev) => ({ ...prev, [name]: errorMessage }));
+      } else {
+        setErrors((prev) => {
+          let obj = { ...prev };
+          delete obj[name];
+          return obj;
+        });
+      }
+      setData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    },
+    [validateProperty]
+  );
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     setData(initialForm);
     setErrors({});
-  };
+  }, [initialForm]);
 
-  const validateForm = () => {
+  const validateForm = useCallback(() => {
     const schemaForValidate = Joi.object(schema);
     const { error } = schemaForValidate.validate(data);
     if (error) return false;
     return true;
-  };
+  }, [schema, data]);
 
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     const handleSubmit = (data) => {
       console.log(data);
     };
     handleSubmit(data);
-  };
+  }, [data]);
 
   return {
     data,

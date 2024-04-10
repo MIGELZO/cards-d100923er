@@ -24,6 +24,7 @@ function CardComponent({ card, handleCardDelete, handleCardLike }) {
       </CardActionArea>
       <CardActionBar
         cardId={card._id}
+        userId={card.user_id}
         handleCardDelete={handleCardDelete}
         handleCardLike={handleCardLike}
       />

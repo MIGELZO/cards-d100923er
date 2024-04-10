@@ -14,6 +14,7 @@ import ResizedWindow from "../sandBox/ResizedWindow";
 import SignupPage from "../users/pages/SignUpPage";
 import LogInPage from "../users/pages/LogInPage";
 import ParentComponent from "../sandBox/optimization/ParentComponent";
+import ParentComponentPage from "../sandBox/context/ParentComponentPage";
 
 export default function Router() {
   return (
@@ -31,6 +32,7 @@ export default function Router() {
         <Route path="form" element={<FormExample />} />
         <Route path="ResizedWindow" element={<ResizedWindow />} />
         <Route path="optimization" element={<ParentComponent />} />
+        <Route path="context" element={<ParentComponentPage />} />
       </Route>
       <Route path="*" element={<ErrorPage />} />
     </Routes>
