@@ -23,7 +23,7 @@ export default function useCards(id) {
     setIsLoading(false);
   }, []);
 
-  const getCardDetails = async (id) => {
+  const getCardDetails = useCallback( async (id) => {
     try {
       setIsLoading(true);
       const response = await axios.get(
@@ -36,7 +36,7 @@ export default function useCards(id) {
       setError(err.message);
     }
     setIsLoading(false);
-  };
+  },[]);
 
   const handleCardDelete = (id) => {
     console.log("You deleted card No.", id);

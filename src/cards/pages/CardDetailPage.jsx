@@ -13,7 +13,7 @@ export default function CardDetailPage() {
 
   useEffect(() => {
     getCardDetails(id);
-  }, [id]);
+  }, [id, getCardDetails]);
 
   if (isLoading) return <Spinner />;
   if (error) return <Error errorMessage={error} />;
