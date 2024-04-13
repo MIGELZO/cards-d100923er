@@ -4,7 +4,7 @@ const UserContext = createContext();
 
 export default function UserProvider({ children }) {
   const user = {
-    _id: "65424ae9a8d1eae12d31e360",
+    _id: "",
     isBusiness: true,
     isAdmin: true,
   };
@@ -16,3 +16,5 @@ export const useUser = () => {
   if (!context) throw new Error("useUser must be use withing a Provider");
   return context;
 };
+
+// 65424ae9a8d1eae12d31e360

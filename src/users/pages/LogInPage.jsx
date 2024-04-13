@@ -5,17 +5,23 @@ import loginSchema from "../models/loginSchema";
 import Container from "@mui/material/Container";
 import PageHeader from "../../components/PageHeader";
 import Form from "../../forms/components/Form";
-import ROUTES from "../../routs/Router"
+import ROUTES from "../../routs/routsModel";
 import Input from "../../forms/components/Input";
+import { Navigate } from "react-router-dom";
+import { useUser } from "../providers/UserProvider";
+import { login } from "../services/usersApiService";
 
 const handleSubmit = (x) => {
-  console.log(x);
+  login()
 };
 
 export default function LogInPage() {
   const { data, errors, handleChange, handleReset, validateForm, onSubmit } =
     useForm(initialLoginForm, loginSchema, handleSubmit);
-  return (
+
+  const userContext = useUser();
+
+  return userContext._id === "" ? (
     <Container>
       <PageHeader
         title="Welcome to Login page"
@@ -56,5 +62,7 @@ export default function LogInPage() {
         </Form>
       </Container>
     </Container>
+  ) : (
+    <Navigate to={ROUTES.ROOT} replace={true} />
   );
 }

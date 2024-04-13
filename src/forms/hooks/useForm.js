@@ -72,11 +72,8 @@ export default function useForm(initialForm, schema, handleSubmit) {
   }, [schema, data]);
 
   const onSubmit = useCallback(() => {
-    const handleSubmit = (data) => {
-      console.log(data);
-    };
     handleSubmit(data);
-  }, [data]);
+  }, []);
 
   return {
     data,

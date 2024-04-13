@@ -7,6 +7,7 @@ export default function RightNavBar() {
   return (
     <Box>
       <NavItem to={ROUTES.LOGIN} lable={"Login"} />
+      <NavItem to={ROUTES.SIGNUP} lable={"Signup"} />
     </Box>
   );
 }
