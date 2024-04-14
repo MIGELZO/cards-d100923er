@@ -23,9 +23,11 @@ export default function SignupPage() {
     handleChangeCheckBox,
   } = useForm(initialSignupForm, signupSchema, handleSubmit);
 
-  const userContext = useUser();
+  const { user } = useUser();
 
-  return userContext._id === "" ? (
+  return user ? (
+    <Navigate to={ROUTES.ROOT} replace />
+  ) : (
     <Container
       sx={{
         paddingTop: 8,
@@ -45,7 +47,5 @@ export default function SignupPage() {
         handleChangeCheckBox={handleChangeCheckBox}
       />
     </Container>
-  ) : (
-    <Navigate to={ROUTES.ROOT} replace={true} />
   );
 }

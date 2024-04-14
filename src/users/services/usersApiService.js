@@ -1,14 +1,10 @@
 import axios from "axios";
 
-const loginService = async (email, password) => {
+const apiUrl = "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users";
+
+const loginService = async (userLogin) => {
   try {
-    const response = await axios.post(
-      "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/login",
-      {
-        email: email,
-        password: password,
-      }
-    );
+    const response = await axios.post(`${apiUrl}/login`, userLogin);
     return response.data;
   } catch (error) {
     throw new Error(error.message);
@@ -17,11 +13,8 @@ const loginService = async (email, password) => {
 
 const signUpService = async (user) => {
   try {
-    const response = await axios.post(
-      "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users",
-      {}
-    );
-    return response.data;
+    const { response } = await axios.post(apiUrl, user);
+    return response;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -29,10 +22,8 @@ const signUpService = async (user) => {
 
 const getUserData = async (id) => {
   try {
-    const response = await axios.get(
-      `https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/${id}`
-    );
-    return response.data;
+    const { response } = await axios.get(`${apiUrl}/${id}`);
+    return response;
   } catch (error) {
     throw new Error(error.message);
   }

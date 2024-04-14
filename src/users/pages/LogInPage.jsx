@@ -18,9 +18,11 @@ export default function LogInPage() {
   const { data, errors, handleChange, handleReset, validateForm, onSubmit } =
     useForm(initialLoginForm, loginSchema, handleSubmit);
 
-  const userContext = useUser();
+  const { user } = useUser();
 
-  return userContext._id === "" ? (
+  return user ? (
+    <Navigate to={ROUTES.ROOT} replace />
+  ) : (
     <Container>
       <PageHeader
         title="Welcome to Login page"
@@ -61,7 +63,5 @@ export default function LogInPage() {
         </Form>
       </Container>
     </Container>
-  ) : (
-    <Navigate to={ROUTES.ROOT} replace={true} />
   );
 }

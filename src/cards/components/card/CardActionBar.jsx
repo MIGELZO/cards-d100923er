@@ -12,33 +12,26 @@ export default function CardActionBar({
   cardId,
   userId,
 }) {
-  const userContext = useUser();
+  const { user } = useUser();
 
   const handleCardEdit = (id) => {
     console.log("Navigate to edit page for card", id);
   };
 
-  return userContext.isAdmin || userContext._id === userId ? (
+  return (
     <CardActions sx={{ paddingTop: 0, justifyContent: "space-between" }}>
       <Box>
-        <IconButton onClick={() => handleCardDelete(cardId)}>
-          <DeleteIcon />
-        </IconButton>
-        <IconButton onClick={() => handleCardEdit(cardId)}>
-          <ModeEditIcon />
-        </IconButton>
+        {user && (user.isAdmin || user._id === userId) ? (
+          <>
+            <IconButton onClick={() => handleCardDelete(cardId)}>
+              <DeleteIcon />
+            </IconButton>
+            <IconButton onClick={() => handleCardEdit(cardId)}>
+              <ModeEditIcon />
+            </IconButton>
+          </>
+        ) : null}
       </Box>
-      <Box>
-        <IconButton>
-          <CallIcon />
-        </IconButton>
-        <IconButton onClick={() => handleCardLike(cardId)}>
-          <Favorite />
-        </IconButton>
-      </Box>
-    </CardActions>
-  ) : (
-    <CardActions sx={{ paddingTop: 0, justifyContent: "space-between" }}>
       <Box>
         <IconButton>
           <CallIcon />
