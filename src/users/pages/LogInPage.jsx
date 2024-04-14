@@ -9,10 +9,9 @@ import ROUTES from "../../routs/routsModel";
 import Input from "../../forms/components/Input";
 import { Navigate } from "react-router-dom";
 import { useUser } from "../providers/UserProvider";
-import { login } from "../services/usersApiService";
 
 const handleSubmit = (x) => {
-  login()
+  console.log(x);
 };
 
 export default function LogInPage() {
