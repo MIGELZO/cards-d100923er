@@ -12,7 +12,6 @@ export default function SignupForm({
   errors,
   data,
   onInputChange,
-  setData,
   handleChangeCheckBox,
 }) {
   return (

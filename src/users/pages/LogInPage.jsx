@@ -9,15 +9,15 @@ import ROUTES from "../../routs/routsModel";
 import Input from "../../forms/components/Input";
 import { Navigate } from "react-router-dom";
 import { useUser } from "../providers/UserProvider";
+import useUsers from "../hooks/useUsers";
 
-const handleSubmit = (x) => {
-  console.log(x);
-};
 
 export default function LogInPage() {
+  const { handleLogin } = useUsers();
+  
   const { data, errors, handleChange, handleReset, validateForm, onSubmit } =
-    useForm(initialLoginForm, loginSchema, handleSubmit);
-
+  useForm(initialLoginForm, loginSchema, handleLogin);
+  
   const { user } = useUser();
 
   return user ? (

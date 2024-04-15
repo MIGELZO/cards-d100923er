@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useMemo } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import { getUser } from "../services/localStorageService";
 
 const UserContext = createContext();
 
@@ -8,10 +15,21 @@ const UserContext = createContext();
 //   isAdmin: true,
 // };
 
-const user = null;
+// const user = null;
 
 export default function UserProvider({ children }) {
-  const value = useMemo(() => ({ user }), []);
+  const [user, setUser] = useState();
+  const [token, setToken] = useState();
+  const value = useMemo(
+    () => ({ user, token, setUser, setToken }),
+    [user, token]
+  );
+
+  useEffect(() => {
+    if (!user) {
+      setUser(getUser);
+    }
+  }, [user]);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
