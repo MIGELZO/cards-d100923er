@@ -10,14 +10,16 @@ import Input from "../../forms/components/Input";
 import { Navigate } from "react-router-dom";
 import { useUser } from "../providers/UserProvider";
 import useUsers from "../hooks/useUsers";
-
+import { Button, Grid } from "@mui/material";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import { Link } from "react-router-dom";
 
 export default function LogInPage() {
   const { handleLogin } = useUsers();
-  
+
   const { data, errors, handleChange, handleReset, validateForm, onSubmit } =
-  useForm(initialLoginForm, loginSchema, handleLogin);
-  
+    useForm(initialLoginForm, loginSchema, handleLogin);
+
   const { user } = useUser();
 
   return user ? (
@@ -60,6 +62,17 @@ export default function LogInPage() {
             onChange={handleChange}
             data={data}
           />
+          <Grid item xs={12}>
+            <Button
+              variant="outlined"
+              component={Link}
+              to={ROUTES.SIGNUP}
+              startIcon={<AccountBoxIcon />}
+              sx={{ width: "100%" }}
+            >
+              Sign Up
+            </Button>
+          </Grid>
         </Form>
       </Container>
     </Container>

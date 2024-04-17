@@ -5,21 +5,16 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { getUser } from "../services/localStorageService";
+import {
+  getTokenFromLocalStorage,
+  getUser,
+} from "../services/localStorageService";
 
 const UserContext = createContext();
 
-// const user = {
-//   _id: "65424ae9a8d1eae12d31e360",
-//   isBusiness: true,
-//   isAdmin: true,
-// };
-
-// const user = null;
-
 export default function UserProvider({ children }) {
-  const [user, setUser] = useState();
-  const [token, setToken] = useState();
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(getTokenFromLocalStorage());
   const value = useMemo(
     () => ({ user, token, setUser, setToken }),
     [user, token]
@@ -27,7 +22,7 @@ export default function UserProvider({ children }) {
 
   useEffect(() => {
     if (!user) {
-      setUser(getUser);
+      setUser(getUser());
     }
   }, [user]);
 

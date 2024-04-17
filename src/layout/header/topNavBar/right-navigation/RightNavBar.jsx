@@ -1,13 +1,22 @@
 import { Box } from "@mui/material";
 import React from "react";
-import NavItem from "../../../../routs/components/NavItem";
-import ROUTES from "../../../../routs/routsModel";
+import { useUser } from "../../../../users/providers/UserProvider";
+import Logged from "./Logged";
+import NotLogged from "./NotLogged";
 
 export default function RightNavBar() {
+  const { user } = useUser();
   return (
-    <Box>
-      <NavItem to={ROUTES.LOGIN} lable={"Login"} />
-      <NavItem to={ROUTES.SIGNUP} lable={"Signup"} />
-    </Box>
+    <>
+      <Box
+        sx={{
+          display: { xs: "none", md: "inline-flex" },
+          alignItems: "center",
+        }}
+      >
+        {user && <Logged />}
+        {!user && <NotLogged />}
+      </Box>
+    </>
   );
 }

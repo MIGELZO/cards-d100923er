@@ -1,39 +1,60 @@
 import { useCallback, useState } from "react";
 import { useUser } from "../providers/UserProvider";
-import { loginService } from "../services/usersApiService";
-import { removeTokenFromLocalStorage, setTokenInLocalStorage } from "../services/localStorageService";
-import { Navigate } from "react-router-dom";
+import { loginService, signUpService } from "../services/usersApiService";
+import {
+  getUser,
+  removeTokenFromLocalStorage,
+  setTokenInLocalStorage,
+} from "../services/localStorageService";
 import ROUTES from "../../routs/routsModel";
+import { Navigate } from "react-router-dom";
+import normalizeUser from "../helpers/normalization/normalizedUser";
 
 export default function useUsers() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-  const { user, setUser, token, setToken } = useUser();
+  const { setUser, setToken } = useUser();
 
   const handleLogin = useCallback(
-    async (user) => {
+    async (userLogin) => {
       try {
         setIsLoading(true);
-        const response = await loginService(user);
-        setToken(response);
-        setTokenInLocalStorage(response);
-        setUser(user);
-        return <Navigate to={ROUTES.CARDS} replace />;
+        const token = await loginService(userLogin);
+        setToken(token);
+        setTokenInLocalStorage(token);
+        setUser(getUser());
+        return Navigate(ROUTES.CARDS);
       } catch (error) {
         setError(error.message);
         setIsLoading(false);
       }
       setIsLoading(false);
     },
-    [setToken,setUser]
+    [setToken, setUser]
   );
 
-  const handleLogout = useCallback((token)=>{
-    removeTokenFromLocalStorage(token)
-    setUser(undefined)
-  },[token])
+  const handleLogout = useCallback(() => {
+    removeTokenFromLocalStorage();
+    setUser(null);
+  }, [setUser]);
 
-  
+  const handleSignup = useCallback(
+    async (userFromClient) => {
+      setIsLoading(true);
+      try {
+        const normalizedUser = normalizeUser(userFromClient);
+        await signUpService(normalizedUser);
+        await handleLogin({
+          email: userFromClient.email,
+          password: userFromClient.password,
+        });
+      } catch (error) {
+        setError(error.message);
+      }
+      setIsLoading(false);
+    },
+    [handleLogin]
+  );
 
-  return { error, isLoading, handleLogin };
+  return { error, isLoading, handleLogin, handleLogout, handleSignup };
 }
