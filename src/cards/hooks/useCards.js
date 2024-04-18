@@ -3,12 +3,14 @@ import {
   getAllCardsService,
   getCardDetailsService,
 } from "../services/cardsApiService";
+import { useSnackbar } from "../../providers/SnackbarProvider";
 
 export default function useCards(id) {
   const [cardsList, setCardsList] = useState([]);
   const [cardData, setCardData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
+  const { SnackbarActivation } = useSnackbar();
 
   const getAllCards = useCallback(async () => {
     try {
@@ -35,13 +37,19 @@ export default function useCards(id) {
     setIsLoading(false);
   }, []);
 
-  const handleCardDelete = useCallback((id) => {
-    console.log("You deleted card No.", id);
-  }, []);
+  const handleCardDelete = useCallback(
+    (id) => {
+      SnackbarActivation("primary", "filled", "You deleted card No." + id);
+    },
+    [SnackbarActivation]
+  );
 
-  const handleCardLike = useCallback((id) => {
-    console.log("You liked card No.", id);
-  }, []);
+  const handleCardLike = useCallback(
+    (id) => {
+      SnackbarActivation("primary", "filled", `You liked card No.${id}`);
+    },
+    [SnackbarActivation]
+  );
 
   return {
     cardData,

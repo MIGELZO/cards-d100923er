@@ -7,7 +7,7 @@ const loginService = async (userLogin) => {
     const response = await axios.post(`${apiUrl}/login`, userLogin);
     return response.data;
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error(error.response.data);
   }
 };
 
@@ -16,7 +16,7 @@ const signUpService = async (user) => {
     const { response } = await axios.post(apiUrl, user);
     return response;
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error(error.response.data);
   }
 };
 
@@ -28,5 +28,7 @@ const getUserData = async (id) => {
     throw new Error(error.message);
   }
 };
+
+
 
 export { loginService, signUpService, getUserData };
