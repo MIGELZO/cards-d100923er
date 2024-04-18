@@ -39,14 +39,14 @@ export default function useCards(id) {
 
   const handleCardDelete = useCallback(
     (id) => {
-      SnackbarActivation("primary", "filled", "You deleted card No." + id);
+      SnackbarActivation("primary", "filled", "You deleted card No. " + id);
     },
     [SnackbarActivation]
   );
 
   const handleCardLike = useCallback(
     (id) => {
-      SnackbarActivation("primary", "filled", `You liked card No.${id}`);
+      SnackbarActivation("primary", "filled", "You liked card No. " + id);
     },
     [SnackbarActivation]
   );
