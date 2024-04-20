@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 export default function SendBox() {
   return (
     <>
-      <AppBar position="sticky" color="transparent">
+      <AppBar position="sticky" color="transparent" >
         <Toolbar>
           <NavItem to="counter" lable="Counter page" sx={{ color: "black" }} />
           <Divider orientation="vertical" variant="middle" flexItem />

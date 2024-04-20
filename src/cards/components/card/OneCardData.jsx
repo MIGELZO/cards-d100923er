@@ -13,7 +13,7 @@ import React from "react";
 export default function OneCardData({ cardData }) {
   return (
     <Box>
-      <Avatar src={cardData.image.url} alt={cardData.image.alt}/>
+      <Avatar src={cardData.image.url} alt={cardData.image.alt} />
       <TableContainer>
         <Table>
           <TableHead>

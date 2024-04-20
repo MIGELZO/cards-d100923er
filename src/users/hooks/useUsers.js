@@ -82,11 +82,11 @@ export default function useUsers() {
     setIsLoading(true);
     try {
       const userData = await getUserData(id);
+      setIsLoading(false);
       return userData;
     } catch (error) {
       setError(error.message);
     }
-    setIsLoading(false);
   }, []);
 
   return {
