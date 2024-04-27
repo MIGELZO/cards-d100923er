@@ -5,6 +5,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import CallIcon from "@mui/icons-material/Call";
 import { useUser } from "../../../users/providers/UserProvider";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../../routs/routsModel";
 
 export default function CardActionBar({
   handleCardDelete,
@@ -13,9 +15,11 @@ export default function CardActionBar({
   userId,
 }) {
   const { user } = useUser();
+  const navigate = useNavigate();
 
   const handleCardEdit = (id) => {
     console.log("Navigate to edit page for card", id);
+    navigate(ROUTES.EDIT_CARD + "/" + id);
   };
 
   return (

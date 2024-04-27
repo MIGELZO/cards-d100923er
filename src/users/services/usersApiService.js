@@ -21,19 +21,6 @@ const signUpService = async (user) => {
   }
 };
 
-//  const getUserData = async (id) => {
-//   try {
-//     const { userData } = await axios.get(`${apiUrl}/${id}`, {
-//       headers: {
-//         "x-auth-token":getTokenFromLocalStorage(),
-//       }
-//   });
-//     return userData;
-//   } catch (error) {
-//     throw new Error(error.response.data);
-//   }
-// };
-
 const getUserData = async (id) => {
   try {
     const { data } = await axios.get(`${apiUrl}/${id}`, {

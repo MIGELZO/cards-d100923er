@@ -9,12 +9,12 @@ export default function SnackbarProvider({ children }) {
   const [type, setType] = useState("filled");
   const [message, setMessage] = useState("");
 
-  const SnackbarActivation = useCallback((color, type, message) => {
+  const snackbarActivation = useCallback((color, message, type = "filled") => {
     setColor(color);
     setType(type);
     setMessage(message);
     setOpen(true);
-  },[]);
+  }, []);
 
   const handleClose = useCallback((reason) => {
     if (reason === "clickaway") {
@@ -22,7 +22,7 @@ export default function SnackbarProvider({ children }) {
     }
 
     setOpen(false);
-  },[]);
+  }, []);
 
   return (
     <Box>
@@ -36,7 +36,7 @@ export default function SnackbarProvider({ children }) {
           {message}
         </Alert>
       </Snackbar>
-      <SnackbarContext.Provider value={{ SnackbarActivation }}>
+      <SnackbarContext.Provider value={{ snackbarActivation }}>
         {children}
       </SnackbarContext.Provider>
     </Box>

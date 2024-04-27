@@ -20,7 +20,7 @@ export default function useUsers() {
   const navigate = useNavigate();
   const [error, setError] = useState();
   const { setUser, setToken } = useUser();
-  const { SnackbarActivation } = useSnackbar();
+  const { snackbarActivation } = useSnackbar();
 
   const handleLogin = useCallback(
     async (userLogin, isSigned = false) => {
@@ -32,29 +32,29 @@ export default function useUsers() {
         setUser(getUser());
         navigate(ROUTES.CARDS);
         isSigned
-          ? SnackbarActivation(
+          ? snackbarActivation(
               "success",
               "filled",
               "SIGNED UP and LOGGED IN Successfully"
             )
-          : SnackbarActivation("success", "filled", "LOGGED IN Successfuly");
+          : snackbarActivation("success", "LOGGED IN Successfuly", "filled");
         return;
       } catch (error) {
         setError(error.message);
         console.log(error);
-        SnackbarActivation("error", "filled", error.message);
+        snackbarActivation("error", error.message, "filled");
         setIsLoading(false);
       }
       setIsLoading(false);
     },
-    [setToken, setUser, navigate, SnackbarActivation]
+    [setToken, setUser, navigate, snackbarActivation]
   );
 
   const handleLogout = useCallback(() => {
     removeTokenFromLocalStorage();
     setUser(null);
-    SnackbarActivation("success", "filled", "LOGGEDOUT Succesfuly");
-  }, [setUser, SnackbarActivation]);
+    snackbarActivation("success", "LOGGEDOUT Succesfuly", "filled");
+  }, [setUser, snackbarActivation]);
 
   const handleSignup = useCallback(
     async (userFromClient) => {
@@ -71,11 +71,11 @@ export default function useUsers() {
         );
       } catch (error) {
         setError(error.message);
-        SnackbarActivation("error", "filled", error.message);
+        snackbarActivation("error", error.message, "filled");
       }
       setIsLoading(false);
     },
-    [handleLogin, SnackbarActivation]
+    [handleLogin, snackbarActivation]
   );
 
   const handleGetUser = useCallback(async (id) => {

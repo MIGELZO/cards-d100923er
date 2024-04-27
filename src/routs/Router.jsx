@@ -16,6 +16,9 @@ import LogInPage from "../users/pages/LogInPage";
 import ParentComponent from "../sandBox/optimization/ParentComponent";
 import ParentComponentPage from "../sandBox/context/ParentComponentPage";
 import ProfilePage from "../users/pages/ProfilePage";
+import AddCardPage from "../cards/pages/AddCardPage";
+import EditCardPage from "../cards/pages/EditCardPage";
+
 
 export default function Router() {
   return (
@@ -26,6 +29,8 @@ export default function Router() {
       <Route path={ROUTES.CARD_INFO + "/:id"} element={<CardDetailPage />} />
       <Route path={ROUTES.SIGNUP} element={<SignupPage />} />
       <Route path={ROUTES.LOGIN} element={<LogInPage />} />
+      <Route path={ROUTES.CREATE_CARD} element={<AddCardPage/>}/>
+      <Route path={ROUTES.EDIT_CARD} element={<EditCardPage/>}/>
       <Route path={ROUTES.USER_PROFILE} element={<ProfilePage />} />
       <Route path={ROUTES.SANDBOX} element={<SendBox />}>
         <Route path="counter" element={<Counter />} />
