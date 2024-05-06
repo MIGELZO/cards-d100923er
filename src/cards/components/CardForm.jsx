@@ -2,9 +2,6 @@ import React from "react";
 import Form from "../../forms/components/Form";
 import Input from "../../forms/components/Input";
 import ROUTES from "../../routs/routsModel";
-import { Button } from "@mui/material";
-import normalizeCard from "../helpers/normalization/normalizeCard";
-
 
 const CardForm = ({
   onSubmit,
@@ -15,9 +12,6 @@ const CardForm = ({
   data,
   title,
 }) => {
-  const check = ()=>{
-    console.log(normalizeCard(data));
-  }
   return (
     <Form
       onSubmit={onSubmit}
@@ -149,7 +143,6 @@ const CardForm = ({
         sm={6}
         required={false}
       />
-      <Button onClick={check}>tst</Button>
     </Form>
   );
 };

@@ -15,7 +15,7 @@ export default function Logo() {
           color: "#fff",
         }}
       >
-        BCard
+        BizCard
       </Typography>
     </NavBarLink>
   );
