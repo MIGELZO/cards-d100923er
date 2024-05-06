@@ -26,6 +26,10 @@ export default function SnackbarProvider({ children }) {
 
   return (
     <Box>
+      <SnackbarContext.Provider value={{ snackbarActivation }}>
+        {children}
+      </SnackbarContext.Provider>
+      
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert
           onClose={handleClose}
@@ -36,9 +40,6 @@ export default function SnackbarProvider({ children }) {
           {message}
         </Alert>
       </Snackbar>
-      <SnackbarContext.Provider value={{ snackbarActivation }}>
-        {children}
-      </SnackbarContext.Provider>
     </Box>
   );
 }

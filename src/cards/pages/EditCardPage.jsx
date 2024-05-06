@@ -15,7 +15,7 @@ export default function EditCardPage() {
   //id of the card - useParams
   const { id } = useParams();
   //handleUpdateCard & handleGetCard & card - useCards
-  const { handleUpdateCard, getCardById, card } = useCards();
+  const { handleUpdateCard, getCardDetails, cardData } = useCards();
 
   //user - useUser (provider)
   const { user } = useUser();
@@ -29,15 +29,15 @@ export default function EditCardPage() {
     validateForm,
     onSubmit,
   } = useForm(initialCardForm, cardSchema, (newCard) =>
-    handleUpdateCard(card._id, newCard)
+    handleUpdateCard(cardData._id, newCard)
   );
   //useEffect - update the form data to this card data
   useEffect(() => {
-    getCardById(id).then((data) => {
+    getCardDetails(id).then((data) => {
       const modelCard = mapCardToModel(data);
       setData(modelCard);
     });
-  }, [getCardById, setData, id]);
+  }, [getCardDetails, setData, id]);
 
   if (!user) return <Navigate replace to={ROUTES.CARDS} />;
 

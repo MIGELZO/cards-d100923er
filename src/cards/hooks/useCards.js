@@ -11,9 +11,6 @@ import ROUTES from "../../routs/routsModel";
 import normalizeCard from "../helpers/normalization/normalizeCard";
 import useAxios from "../../hooks/useAxios";
 
-
-
-
 export default function useCards(id) {
   const [cardsList, setCardsList] = useState([]);
   const [cardData, setCardData] = useState(null);
@@ -42,7 +39,8 @@ export default function useCards(id) {
       setIsLoading(true);
       const data = await getCardDetailsService(id);
       setCardData(data);
-      return data
+      setIsLoading(false);
+      return data;
     } catch (err) {
       setIsLoading(false);
       setError(err.message);
@@ -77,7 +75,10 @@ export default function useCards(id) {
       try {
         const card = await editCard(cardId, normalizeCard(cardFromClient));
         setCardData(card);
-        snackbarActivation("success", "The business card has been successfully updated");
+        snackbarActivation(
+          "success",
+          "The business card has been successfully updated"
+        );
         setTimeout(() => {
           navigate(ROUTES.ROOT);
         }, 1000);
