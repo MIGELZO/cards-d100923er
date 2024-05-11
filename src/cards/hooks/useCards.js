@@ -1,21 +1,25 @@
 import { useCallback, useState } from "react";
 import {
   createCard,
+  deleteCard,
   editCard,
   getAllCardsService,
   getCardDetailsService,
+  getLocationCoordinate,
 } from "../services/cardsApiService";
 import { useSnackbar } from "../../providers/SnackbarProvider";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routs/routsModel";
 import normalizeCard from "../helpers/normalization/normalizeCard";
 import useAxios from "../../hooks/useAxios";
+import normalizeAddress from "../helpers/normalization/normalizeAddress";
 
 export default function useCards(id) {
   const [cardsList, setCardsList] = useState([]);
   const [cardData, setCardData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
+  const [mapCenter, setMapCenter] = useState({});
   const { snackbarActivation } = useSnackbar();
   const navigate = useNavigate();
   useAxios();
@@ -91,10 +95,21 @@ export default function useCards(id) {
   );
 
   const handleCardDelete = useCallback(
-    (id) => {
-      snackbarActivation("primary", "You deleted card No. " + id, "filled");
+    async (id) => {
+      setIsLoading(true);
+      try {
+        const card = await deleteCard(id);
+        setCardData(card);
+        snackbarActivation("primary", "You deleted card No. " + id, "filled");
+        setTimeout(() => {
+          getAllCards();
+        }, 1000);
+      } catch (error) {
+        setError(error.message);
+      }
+      setIsLoading(false);
     },
-    [snackbarActivation]
+    [snackbarActivation, getAllCards]
   );
 
   const handleCardLike = useCallback(
@@ -104,16 +119,30 @@ export default function useCards(id) {
     [snackbarActivation]
   );
 
+  const addressForMap = useCallback(async (address) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const center = await getLocationCoordinate(normalizeAddress(address));
+      setMapCenter(center);
+    } catch (error) {
+      setError(error.message);
+    }
+    setIsLoading(false);
+  }, []);
+
   return {
     cardData,
     isLoading,
     error,
     cardsList,
+    mapCenter,
     handleCardDelete,
     handleCardLike,
     getAllCards,
     getCardDetails,
     handleCreateCard,
     handleUpdateCard,
+    addressForMap,
   };
 }

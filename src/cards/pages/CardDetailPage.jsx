@@ -6,14 +6,17 @@ import OneCardData from "../components/card/OneCardData";
 import Spinner from "../../components/Spinner";
 import Error from "../../components/Error";
 import useCards from "../hooks/useCards";
+import MapComponent from "../components/MapComponent";
 
 export default function CardDetailPage() {
   const { id } = useParams();
-  const { cardData, isLoading, error, getCardDetails } = useCards();
+  const { cardData, isLoading, error, getCardDetails } =
+    useCards();
 
   useEffect(() => {
     getCardDetails(id);
   }, [id, getCardDetails]);
+
 
   if (isLoading) return <Spinner />;
   if (error) return <Error errorMessage={error} />;
@@ -24,7 +27,9 @@ export default function CardDetailPage() {
           title="Card Details"
           subtitle="Here you can find all the details about specific card"
         />
+
         <OneCardData cardData={cardData} />
+        <MapComponent cardData={cardData}/>
       </Container>
     );
   }

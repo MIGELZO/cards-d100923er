@@ -8,9 +8,9 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import React from "react";
 
 export default function OneCardData({ cardData }) {
+
   return (
     <Box>
       <Avatar src={cardData.image.url} alt={cardData.image.alt} />

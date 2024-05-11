@@ -1,5 +1,7 @@
 import axios from "axios";
 const apiUrl = "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards";
+const googleMapKey = "AIzaSyAoMZaKDM1b52gc-j9aMUvngp_Flo48G6s";
+const googleMapUrl = "https://maps.googleapis.com/maps/api/geocode/json";
 
 export const getAllCardsService = async () => {
   try {
@@ -90,5 +92,22 @@ export const changeLikeStatus = async (cardId) => {
     return data;
   } catch (error) {
     return Promise.reject(error.message);
+  }
+};
+
+export const getLocationCoordinate = async (address) => {
+
+  const params = {
+    key:googleMapKey,
+    address
+  };
+
+  axios.defaults.headers.common["x-auth-token"] = null
+
+  try {
+    const  response  = await axios.get(googleMapUrl, { params });
+    return response.data.results[0].geometry.location;
+  } catch (error) {
+    throw new Error(error.message);
   }
 };
