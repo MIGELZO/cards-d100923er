@@ -23,7 +23,6 @@ export default function useCards(id) {
   const [error, setError] = useState();
   const [mapCenter, setMapCenter] = useState({});
   const { snackbarActivation } = useSnackbar();
-  const [isLiked, setIsLiked] = useState("");
   const navigate = useNavigate();
   useAxios();
 
@@ -119,17 +118,11 @@ export default function useCards(id) {
         const card = await likeCard(id);
         setCardData(card);
         snackbarActivation("primary", "You liked card No. " + id, "filled");
-        card.likes.includes(user._id) ? setIsLiked("red") : setIsLiked("grey");
-        setTimeout(()=>{
-          console.log(card);
-        console.log(user);
-        console.log(isLiked);
-        },1000)
       } catch (error) {
         setError(error.message);
       }
     },
-    [snackbarActivation, isLiked]
+    [snackbarActivation]
   );
 
   const addressForMap = useCallback(async (address) => {
@@ -150,7 +143,6 @@ export default function useCards(id) {
     error,
     cardsList,
     mapCenter,
-    isLiked,
     handleCardDelete,
     handleCardLike,
     getAllCards,

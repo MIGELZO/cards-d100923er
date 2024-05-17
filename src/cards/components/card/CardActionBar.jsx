@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, IconButton, CardActions } from "@mui/material";
 import Favorite from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -7,18 +7,24 @@ import CallIcon from "@mui/icons-material/Call";
 import { useUser } from "../../../users/providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routs/routsModel";
-import useCards from "../../hooks/useCards";
 
 export default function CardActionBar({
   handleCardDelete,
   handleCardLike,
   cardId,
   userId,
-  cardLikes
+  cardLikes,
 }) {
   const { user } = useUser();
-  const { isLiked } = useCards();
   const navigate = useNavigate();
+  const [isLiked, setIsLiked] = useState("empty");
+
+  // useEffect(
+  //   () => {
+  //     cardLikes.includes(user._id) ? setIsLiked("red") : setIsLiked("grey");
+  //   },
+  //   [cardLikes,user._id]
+  // );
 
   const handleCardEdit = (id) => {
     console.log("Navigate to edit page for card", id);
@@ -43,10 +49,11 @@ export default function CardActionBar({
         <IconButton>
           <CallIcon />
         </IconButton>
-        <IconButton onClick={() => handleCardLike(cardId ,user)}>
-        {isLiked=== "" && cardLikes.includes(user._id) ? 
-          (<Favorite  sx={{color:"red"}}/>) : ( <Favorite sx={{color: isLiked }}/>)}
-        </IconButton>
+        {user ? (
+          <IconButton onClick={() => handleCardLike(cardId, user)}>
+            <Favorite sx={{ color: isLiked }} />
+          </IconButton>
+        ) : null}
       </Box>
     </CardActions>
   );

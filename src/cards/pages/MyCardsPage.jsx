@@ -3,9 +3,13 @@ import PageHeader from "../../components/PageHeader";
 import CardsFeedBack from "../components/CardsFeedBack";
 import useCards from "../hooks/useCards";
 import AddNewCardButton from "../components/AddNewCardButton";
+import { useUser } from "../../users/providers/UserProvider";
+import ROUTES from "../../routs/routsModel";
+import { Navigate } from "react-router-dom";
 
 
 export default function MyCardsPage() {
+  const {user}=useUser();
     const {
         isLoading,
         error,
@@ -19,6 +23,8 @@ export default function MyCardsPage() {
         getAllCards();
       }, [getAllCards]);
     
+      if(!user) return <Navigate to={ROUTES.ROOT} replace />
+
       return (
         <div>
           <PageHeader

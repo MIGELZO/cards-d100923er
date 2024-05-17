@@ -16,7 +16,7 @@ export default function Cards({ cardsList, handleCardDelete, handleCardLike }) {
     );
   }
 
-  if (location.pathname === "/cards") {
+  if (location.pathname === "/cards" || location.pathname === "/") {
     return (
       <Container sx={{ display: "flex", flexWrap: "wrap" }}>
         {cardsList.map((card) => (
@@ -32,13 +32,14 @@ export default function Cards({ cardsList, handleCardDelete, handleCardLike }) {
   }
 
   if (location.pathname === "/my-cards") {
-    const filterdCards = cardsList.filter((card) =>
-      card.user_id === user._id
+    const myFilterdCards = cardsList.filter(
+      (card) => card.user_id === user._id
     );
-
-    return (
+    return myFilterdCards.length === 0 ? (
+      <Typography>Oops.. it seems you have no cards to display</Typography>
+    ) : (
       <Container sx={{ display: "flex", flexWrap: "wrap" }}>
-        {filterdCards.map((card) => (
+        {myFilterdCards.map((card) => (
           <CardComponent
             key={card._id}
             card={card}
@@ -51,13 +52,16 @@ export default function Cards({ cardsList, handleCardDelete, handleCardLike }) {
   }
 
   if (location.pathname === "/fav-cards") {
-    const filterdCards = cardsList.filter((card) =>
+    const likedFilterdCards = cardsList.filter((card) =>
       card.likes.includes(user._id)
     );
-
-    return (
+    return likedFilterdCards.length === 0 ? (
+      <Typography>
+        Oops.. it seems there are no favorit cards to display
+      </Typography>
+    ) : (
       <Container sx={{ display: "flex", flexWrap: "wrap" }}>
-        {filterdCards.map((card) => (
+        {likedFilterdCards.map((card) => (
           <CardComponent
             key={card._id}
             card={card}
