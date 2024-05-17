@@ -8,37 +8,31 @@ import ROUTES from "../../routs/routsModel";
 import { useUser } from "../../users/providers/UserProvider";
 
 export default function FavoritCardsPage() {
-  const {user}=useUser();
+  const { user } = useUser();
 
-    const {
-        isLoading,
-        error,
-        cardsList,
-        handleCardDelete,
-        handleCardLike,
-        getAllCards,
-      } = useCards();
-    
-      useEffect(() => {
-        getAllCards();
-      }, [getAllCards]);
-    
-      if(!user) return <Navigate to={ROUTES.ROOT} replace />
+  const { value, handleCardDelete, handleCardLike, getAllCards } = useCards();
+  const { isLoading, error, filteredCards } = value;
 
-      return (
-        <div>
-          <PageHeader
-            title="Favorit cards"
-            subtitle="On this page you can find all bussines cards you liked"
-          />
-          <CardsFeedBack
-            cardsList={cardsList}
-            handleCardDelete={handleCardDelete}
-            handleCardLike={handleCardLike}
-            isLoading={isLoading}
-            error={error}
-          />
-          <AddNewCardButton/>
-        </div>
-      );
+  useEffect(() => {
+    getAllCards();
+  }, [getAllCards]);
+
+  if (!user) return <Navigate to={ROUTES.ROOT} replace />;
+
+  return (
+    <div>
+      <PageHeader
+        title="Favorit cards"
+        subtitle="On this page you can find all bussines cards you liked"
+      />
+      <CardsFeedBack
+        cardsList={filteredCards}
+        handleCardDelete={handleCardDelete}
+        handleCardLike={handleCardLike}
+        isLoading={isLoading}
+        error={error}
+      />
+      <AddNewCardButton />
+    </div>
+  );
 }

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   createCard,
   deleteCard,
@@ -9,12 +9,11 @@ import {
   getLocationCoordinate,
 } from "../services/cardsApiService";
 import { useSnackbar } from "../../providers/SnackbarProvider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import ROUTES from "../../routs/routsModel";
 import normalizeCard from "../helpers/normalization/normalizeCard";
 import useAxios from "../../hooks/useAxios";
 import normalizeAddress from "../helpers/normalization/normalizeAddress";
-
 
 export default function useCards(id) {
   const [cardsList, setCardsList] = useState([]);
@@ -23,8 +22,26 @@ export default function useCards(id) {
   const [error, setError] = useState();
   const [mapCenter, setMapCenter] = useState({});
   const { snackbarActivation } = useSnackbar();
+  const [query, setQuery] = useState("");
+  const [filteredCards, setFilter] = useState(null);
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   useAxios();
+
+  useEffect(() => {
+    setQuery(searchParams.get("q") ?? "");
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (cardsList) {
+      setFilter(
+        cardsList.filter(
+          (card) =>
+            card.title.includes(query) || String(card.bizNumber).includes(query)
+        )
+      );
+    }
+  }, [cardsList, query]);
 
   const getAllCards = useCallback(async () => {
     try {
@@ -137,11 +154,12 @@ export default function useCards(id) {
     setIsLoading(false);
   }, []);
 
+  const value = useMemo(() => {
+    return { cardData, isLoading, error, cardsList, filteredCards };
+  }, [cardData, isLoading, error, cardsList, filteredCards]);
+
   return {
-    cardData,
-    isLoading,
-    error,
-    cardsList,
+    value,
     mapCenter,
     handleCardDelete,
     handleCardLike,

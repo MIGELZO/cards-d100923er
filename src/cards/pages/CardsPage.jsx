@@ -5,14 +5,8 @@ import useCards from "../hooks/useCards";
 import AddNewCardButton from "../components/AddNewCardButton";
 
 export default function CardPage() {
-  const {
-    isLoading,
-    error,
-    cardsList,
-    handleCardDelete,
-    handleCardLike,
-    getAllCards,
-  } = useCards();
+  const { value, handleCardDelete, handleCardLike, getAllCards } = useCards();
+  const { isLoading, error, filteredCards } = value;
 
   useEffect(() => {
     getAllCards();
@@ -25,13 +19,13 @@ export default function CardPage() {
         subtitle="On this page you can find all bussines cards from all categories"
       />
       <CardsFeedBack
-        cardsList={cardsList}
+        cardsList={filteredCards}
         handleCardDelete={handleCardDelete}
         handleCardLike={handleCardLike}
         isLoading={isLoading}
         error={error}
       />
-      <AddNewCardButton/>
+      <AddNewCardButton />
     </div>
   );
 }
