@@ -18,12 +18,16 @@ import ParentComponentPage from "../sandBox/context/ParentComponentPage";
 import ProfilePage from "../users/pages/ProfilePage";
 import AddCardPage from "../cards/pages/AddCardPage";
 import EditCardPage from "../cards/pages/EditCardPage";
+import MyCardsPage from "../cards/pages/MyCardsPage";
+import FavoritCardsPage from "../cards/pages/FavoritCardsPage";
 
 export default function Router() {
   return (
     <Routes>
       <Route path={ROUTES.ROOT} element={<CardsPage />} />
       <Route path={ROUTES.CARDS} element={<CardsPage />} />
+      <Route path={ROUTES.MY_CARDS} element={<MyCardsPage />} />
+      <Route path={ROUTES.FAV_CARDS} element={<FavoritCardsPage />} />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
       <Route path={ROUTES.CARD_INFO + "/:id"} element={<CardDetailPage />} />
       <Route path={ROUTES.SIGNUP} element={<SignupPage />} />
