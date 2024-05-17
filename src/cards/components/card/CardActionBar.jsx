@@ -7,14 +7,17 @@ import CallIcon from "@mui/icons-material/Call";
 import { useUser } from "../../../users/providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routs/routsModel";
+import useCards from "../../hooks/useCards";
 
 export default function CardActionBar({
   handleCardDelete,
   handleCardLike,
   cardId,
   userId,
+  cardLikes
 }) {
   const { user } = useUser();
+  const { isLiked } = useCards();
   const navigate = useNavigate();
 
   const handleCardEdit = (id) => {
@@ -40,8 +43,9 @@ export default function CardActionBar({
         <IconButton>
           <CallIcon />
         </IconButton>
-        <IconButton onClick={() => handleCardLike(cardId)}>
-          <Favorite />
+        <IconButton onClick={() => handleCardLike(cardId ,user)}>
+        {isLiked=== "" && cardLikes.includes(user._id) ? 
+          (<Favorite  sx={{color:"red"}}/>) : ( <Favorite sx={{color: isLiked }}/>)}
         </IconButton>
       </Box>
     </CardActions>

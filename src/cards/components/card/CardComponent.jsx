@@ -27,6 +27,7 @@ function CardComponent({ card, handleCardDelete, handleCardLike }) {
         userId={card.user_id}
         handleCardDelete={handleCardDelete}
         handleCardLike={handleCardLike}
+        cardLikes={card.likes}
       />
     </Card>
   );

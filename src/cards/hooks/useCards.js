@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import {
   createCard,
   deleteCard,
+  likeCard,
   editCard,
   getAllCardsService,
   getCardDetailsService,
@@ -14,6 +15,7 @@ import normalizeCard from "../helpers/normalization/normalizeCard";
 import useAxios from "../../hooks/useAxios";
 import normalizeAddress from "../helpers/normalization/normalizeAddress";
 
+
 export default function useCards(id) {
   const [cardsList, setCardsList] = useState([]);
   const [cardData, setCardData] = useState(null);
@@ -21,6 +23,7 @@ export default function useCards(id) {
   const [error, setError] = useState();
   const [mapCenter, setMapCenter] = useState({});
   const { snackbarActivation } = useSnackbar();
+  const [isLiked, setIsLiked] = useState("");
   const navigate = useNavigate();
   useAxios();
 
@@ -96,7 +99,6 @@ export default function useCards(id) {
 
   const handleCardDelete = useCallback(
     async (id) => {
-      setIsLoading(true);
       try {
         const card = await deleteCard(id);
         setCardData(card);
@@ -107,16 +109,27 @@ export default function useCards(id) {
       } catch (error) {
         setError(error.message);
       }
-      setIsLoading(false);
     },
     [snackbarActivation, getAllCards]
   );
 
   const handleCardLike = useCallback(
-    (id) => {
-      snackbarActivation("primary", "You liked card No. " + id, "filled");
+    async (id, user) => {
+      try {
+        const card = await likeCard(id);
+        setCardData(card);
+        snackbarActivation("primary", "You liked card No. " + id, "filled");
+        card.likes.includes(user._id) ? setIsLiked("red") : setIsLiked("grey");
+        setTimeout(()=>{
+          console.log(card);
+        console.log(user);
+        console.log(isLiked);
+        },1000)
+      } catch (error) {
+        setError(error.message);
+      }
     },
-    [snackbarActivation]
+    [snackbarActivation, isLiked]
   );
 
   const addressForMap = useCallback(async (address) => {
@@ -137,6 +150,7 @@ export default function useCards(id) {
     error,
     cardsList,
     mapCenter,
+    isLiked,
     handleCardDelete,
     handleCardLike,
     getAllCards,

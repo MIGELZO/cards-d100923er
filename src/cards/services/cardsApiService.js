@@ -40,6 +40,16 @@ export const deleteCard = async (cardId) => {
   }
 };
 
+
+export const likeCard = async (cardId) => {
+  try {
+    const { data } = await axios.patch(`${apiUrl}/${cardId}`);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.message);
+  }
+};
+
 export const createCard = async (card) => {
   try {
     const { data } = await axios.post(apiUrl, card);
