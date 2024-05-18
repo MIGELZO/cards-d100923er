@@ -3,6 +3,7 @@ import PageHeader from "../../components/PageHeader";
 import CardsFeedBack from "../components/CardsFeedBack";
 import useCards from "../hooks/useCards";
 import AddNewCardButton from "../components/AddNewCardButton";
+import { useUser } from "../../users/providers/UserProvider";
 
 export default function CardPage() {
   const { value, handleCardDelete, handleCardLike, getAllCards } = useCards();
@@ -11,6 +12,8 @@ export default function CardPage() {
   useEffect(() => {
     getAllCards();
   }, [getAllCards]);
+
+  const { user } = useUser();
 
   return (
     <div>
@@ -25,7 +28,9 @@ export default function CardPage() {
         isLoading={isLoading}
         error={error}
       />
-      <AddNewCardButton />
+      {user && (user.isAdmin === true || user.isBusiness === true) ? (
+        <AddNewCardButton />
+      ) : null}
     </div>
   );
 }

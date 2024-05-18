@@ -10,8 +10,9 @@ import MapComponent from "../components/MapComponent";
 
 export default function CardDetailPage() {
   const { id } = useParams();
-  const { cardData, isLoading, error, getCardDetails } =
+  const { value, getCardDetails } =
     useCards();
+    const { isLoading, error, cardData } = value;
 
   useEffect(() => {
     getCardDetails(id);

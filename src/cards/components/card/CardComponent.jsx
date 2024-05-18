@@ -28,6 +28,7 @@ function CardComponent({ card, handleCardDelete, handleCardLike }) {
         handleCardDelete={handleCardDelete}
         handleCardLike={handleCardLike}
         cardLikes={card.likes}
+        cardTitle={card.title}
       />
     </Card>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, IconButton, CardActions } from "@mui/material";
 import Favorite from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -7,6 +7,7 @@ import CallIcon from "@mui/icons-material/Call";
 import { useUser } from "../../../users/providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routs/routsModel";
+import { useSnackbar } from "../../../providers/SnackbarProvider";
 
 export default function CardActionBar({
   handleCardDelete,
@@ -14,17 +15,32 @@ export default function CardActionBar({
   cardId,
   userId,
   cardLikes,
+  cardTitle,
 }) {
   const { user } = useUser();
   const navigate = useNavigate();
-  const [isLiked, setIsLiked] = useState("empty");
+  const { snackbarActivation } = useSnackbar();
+  const [liked, setLiked] = useState(cardLikes.includes(user._id));
 
-  // useEffect(
-  //   () => {
-  //     cardLikes.includes(user._id) ? setIsLiked("red") : setIsLiked("grey");
-  //   },
-  //   [cardLikes,user._id]
-  // );
+  const toggleLike = () => {
+    setLiked(!liked);
+    const changeLikeStatus = handleCardLike(cardId);
+    if (changeLikeStatus) {
+      if (!liked) {
+        return snackbarActivation(
+          "info",
+          `You added ${cardTitle} card to favorites`
+        );
+      } else {
+        return snackbarActivation(
+          "info",
+          `You removed ${cardTitle} card from favorites`
+        );
+      }
+    } else {
+      setLiked(!liked);
+    }
+  };
 
   const handleCardEdit = (id) => {
     console.log("Navigate to edit page for card", id);
@@ -50,8 +66,8 @@ export default function CardActionBar({
           <CallIcon />
         </IconButton>
         {user ? (
-          <IconButton onClick={() => handleCardLike(cardId, user)}>
-            <Favorite sx={{ color: isLiked }} />
+          <IconButton onClick={toggleLike}>
+            {liked ? <Favorite sx={{ color: "red" }} /> : <Favorite />}
           </IconButton>
         ) : null}
       </Box>

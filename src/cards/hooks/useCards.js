@@ -134,12 +134,11 @@ export default function useCards(id) {
       try {
         const card = await likeCard(id);
         setCardData(card);
-        snackbarActivation("primary", "You liked card No. " + id, "filled");
       } catch (error) {
         setError(error.message);
       }
     },
-    [snackbarActivation]
+    []
   );
 
   const addressForMap = useCallback(async (address) => {

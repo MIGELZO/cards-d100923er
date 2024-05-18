@@ -54,6 +54,7 @@ export default function useUsers() {
     removeTokenFromLocalStorage();
     setUser(null);
     snackbarActivation("success", "LOGGEDOUT Succesfuly", "filled");
+    window.location.reload();
   }, [setUser, snackbarActivation]);
 
   const handleSignup = useCallback(
