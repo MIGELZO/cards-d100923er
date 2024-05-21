@@ -8,68 +8,42 @@ export default function Cards({ cardsList, handleCardDelete, handleCardLike }) {
   const location = useLocation();
   const { user } = useUser();
 
-  if (cardsList.length === 0) {
-    return (
-      <Typography>
-        Oops.. it seems there are no business cards to display
-      </Typography>
-    );
-  }
+  const getFilteredCards = () => {
+    switch (location.pathname) {
+      case "/my-cards":
+        return cardsList.filter((card) => card.user_id === user._id);
+      case "/fav-cards":
+        return cardsList.filter((card) => card.likes.includes(user._id));
+      default:
+        return cardsList;
+    }
+  };
 
-  if (location.pathname === "/cards" || location.pathname === "/") {
-    return (
-      <Container sx={{ display: "flex", flexWrap: "wrap" }}>
-        {cardsList.map((card) => (
-          <CardComponent
-            key={card._id}
-            card={card}
-            handleCardDelete={handleCardDelete}
-            handleCardLike={handleCardLike}
-          />
-        ))}
-      </Container>
-    );
-  }
+  const getNoCardsMessage = () => {
+    switch (location.pathname) {
+      case "/my-cards":
+        return "Oops.. it seems there are no existing business cards to display";
+      case "/fav-cards":
+        return "Oops.. it seems there are no favorite business cards to display";
+      default:
+        return "Oops.. it seems there are no business cards to display";
+    }
+  };
 
-  if (location.pathname === "/my-cards") {
-    const myFilterdCards = cardsList.filter(
-      (card) => card.user_id === user._id
-    );
-    return myFilterdCards.length === 0 ? (
-      <Typography>Oops.. it seems you have no cards to display</Typography>
-    ) : (
-      <Container sx={{ display: "flex", flexWrap: "wrap" }}>
-        {myFilterdCards.map((card) => (
-          <CardComponent
-            key={card._id}
-            card={card}
-            handleCardDelete={handleCardDelete}
-            handleCardLike={handleCardLike}
-          />
-        ))}
-      </Container>
-    );
-  }
+  const displayCards = getFilteredCards();
 
-  if (location.pathname === "/fav-cards") {
-    const likedFilterdCards = cardsList.filter((card) =>
-      card.likes.includes(user._id)
-    );
-    return likedFilterdCards.length === 0 ? (
-      <Typography>
-        Oops.. it seems there are no favorit cards to display
-      </Typography>
-    ) : (
-      <Container sx={{ display: "flex", flexWrap: "wrap" }}>
-        {likedFilterdCards.map((card) => (
-          <CardComponent
-            key={card._id}
-            card={card}
-            handleCardDelete={handleCardDelete}
-            handleCardLike={handleCardLike}
-          />
-        ))}
-      </Container>
-    );
-  }
+  return displayCards.length === 0 ? (
+    <Typography>{getNoCardsMessage()}</Typography>
+  ) : (
+    <Container sx={{ display: "flex", flexWrap: "wrap" }}>
+      {displayCards.map((card) => (
+        <CardComponent
+          key={card._id}
+          card={card}
+          handleCardDelete={handleCardDelete}
+          handleCardLike={handleCardLike}
+        />
+      ))}
+    </Container>
+  );
 }

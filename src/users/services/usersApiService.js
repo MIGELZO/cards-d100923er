@@ -34,4 +34,21 @@ const getUserData = async (id) => {
   }
 };
 
-export { loginService, signUpService, getUserData };
+const updateUser = async (id, normalizedExistingUser) => {
+  try {
+    const { data } = await axios.put(
+      `${apiUrl}/${id}`,
+      normalizedExistingUser,
+      {
+        headers: {
+          "x-auth-token": getTokenFromLocalStorage(),
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.message.data);
+  }
+};
+
+export { loginService, signUpService, getUserData, updateUser };

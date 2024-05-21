@@ -4,6 +4,7 @@ import {
   getUserData,
   loginService,
   signUpService,
+  updateUser,
 } from "../services/usersApiService";
 import {
   getUser,
@@ -14,13 +15,15 @@ import ROUTES from "../../routs/routsModel";
 import normalizeUser from "../helpers/normalization/normalizedUser";
 import { useSnackbar } from "../../providers/SnackbarProvider";
 import { useNavigate } from "react-router-dom";
+import normalizedExistingUser from "../helpers/normalization/normalizedExistingUser";
 
 export default function useUsers() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState();
-  const { setUser, setToken } = useUser();
+  const { setUser, setToken, user } = useUser();
   const { snackbarActivation } = useSnackbar();
+  const [existingUser, setExistingUser] = useState([]);
 
   const handleLogin = useCallback(
     async (userLogin, isSigned = false) => {
@@ -90,12 +93,40 @@ export default function useUsers() {
     }
   }, []);
 
+  const handleUpdateUser = useCallback(
+    async (userFromClient) => {
+      setIsLoading(true);
+
+      try {
+        const normalizedUser = await updateUser(
+          user._id,
+          normalizedExistingUser(userFromClient)
+        );
+        setExistingUser(normalizedUser);
+        snackbarActivation(
+          "success",
+          `${normalizedUser.name.first} your details has been successfully updated`
+        );
+        setTimeout(() => {
+          navigate(ROUTES.ROOT);
+        }, 1000);
+      } catch (error) {
+        setError(error.message);
+      }
+      setIsLoading(false);
+    },
+    [snackbarActivation, navigate, user._id]
+  );
+
   return {
     error,
     isLoading,
+    existingUser,
     handleLogin,
     handleLogout,
     handleSignup,
     handleGetUser,
+    handleUpdateUser,
+    setExistingUser,
   };
 }

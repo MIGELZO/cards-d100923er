@@ -20,7 +20,13 @@ export default function CardActionBar({
   const { user } = useUser();
   const navigate = useNavigate();
   const { snackbarActivation } = useSnackbar();
-  const [liked, setLiked] = useState(cardLikes.includes(user._id));
+
+  let userLoginInfo = 0;
+  if (user) {
+    userLoginInfo = user._id;
+  }
+
+  const [liked, setLiked] = useState(cardLikes.includes(userLoginInfo));
 
   const toggleLike = () => {
     setLiked(!liked);

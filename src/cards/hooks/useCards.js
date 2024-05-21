@@ -129,17 +129,14 @@ export default function useCards(id) {
     [snackbarActivation, getAllCards]
   );
 
-  const handleCardLike = useCallback(
-    async (id, user) => {
-      try {
-        const card = await likeCard(id);
-        setCardData(card);
-      } catch (error) {
-        setError(error.message);
-      }
-    },
-    []
-  );
+  const handleCardLike = useCallback(async (id, user) => {
+    try {
+      const card = await likeCard(id);
+      setCardData(card);
+    } catch (error) {
+      setError(error.message);
+    }
+  }, []);
 
   const addressForMap = useCallback(async (address) => {
     setIsLoading(true);
@@ -148,6 +145,7 @@ export default function useCards(id) {
       const center = await getLocationCoordinate(normalizeAddress(address));
       setMapCenter(center);
     } catch (error) {
+      setMapCenter(false);
       setError(error.message);
     }
     setIsLoading(false);
