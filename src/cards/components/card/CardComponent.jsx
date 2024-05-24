@@ -29,6 +29,7 @@ function CardComponent({ card, handleCardDelete, handleCardLike }) {
         handleCardLike={handleCardLike}
         cardLikes={card.likes}
         cardTitle={card.title}
+        cardPhone={card.phone}
       />
     </Card>
   );

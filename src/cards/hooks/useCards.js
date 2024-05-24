@@ -26,6 +26,7 @@ export default function useCards(id) {
   const [filteredCards, setFilter] = useState(null);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
   useAxios();
 
   useEffect(() => {

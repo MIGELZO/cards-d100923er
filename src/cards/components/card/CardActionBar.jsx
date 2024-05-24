@@ -8,6 +8,7 @@ import { useUser } from "../../../users/providers/UserProvider";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routs/routsModel";
 import { useSnackbar } from "../../../providers/SnackbarProvider";
+import { useAlert } from "../../../providers/AlertProvider";
 
 export default function CardActionBar({
   handleCardDelete,
@@ -16,10 +17,12 @@ export default function CardActionBar({
   userId,
   cardLikes,
   cardTitle,
+  cardPhone,
 }) {
   const { user } = useUser();
   const navigate = useNavigate();
   const { snackbarActivation } = useSnackbar();
+  const { alertActivation } = useAlert();
 
   let userLoginInfo = 0;
   if (user) {
@@ -68,7 +71,15 @@ export default function CardActionBar({
         ) : null}
       </Box>
       <Box>
-        <IconButton>
+        <IconButton
+          onClick={() =>
+            alertActivation(
+              "info",
+              `The phone number of ${cardTitle} is:`,
+              cardPhone
+            )
+          }
+        >
           <CallIcon />
         </IconButton>
         {user ? (

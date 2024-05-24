@@ -5,18 +5,21 @@ import Layout from "./layout/Layout";
 import UserProvider from "./users/providers/UserProvider";
 import CustomThemeProvider from "./providers/CustomThemeProvider";
 import SnackbarProvider from "./providers/SnackbarProvider";
+import AlertProvider from "./providers/AlertProvider";
 
 function App() {
   return (
     <BrowserRouter>
       <UserProvider>
-        <SnackbarProvider>
-          <CustomThemeProvider>
-            <Layout>
-              <Router />
-            </Layout>
-          </CustomThemeProvider>
-        </SnackbarProvider>
+        <AlertProvider>
+          <SnackbarProvider>
+            <CustomThemeProvider>
+              <Layout>
+                <Router />
+              </Layout>
+            </CustomThemeProvider>
+          </SnackbarProvider>
+        </AlertProvider>
       </UserProvider>
     </BrowserRouter>
   );
