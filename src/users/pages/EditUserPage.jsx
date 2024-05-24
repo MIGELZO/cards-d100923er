@@ -4,14 +4,17 @@ import Container from "@mui/material/Container";
 import useUsers from "../hooks/useUsers";
 import editSchema from "../models/editSchema";
 import EditForm from "../components/EditForm";
-import { getUser } from "../services/localStorageService";
 import initialEditForm from "../helpers/initialForms/initialEditForm";
 import userToModel from "../helpers/initialForms/userToModel";
+import { Navigate } from "react-router-dom";
+import ROUTES from "../../routs/routsModel";
+import { getUser } from "../services/localStorageService";
 
 export default function EditUserPage() {
   const { handleUpdateUser, handleGetUser } = useUsers();
 
   const user = getUser();
+  if (!user) <Navigate replace to={ROUTES.CARDS} />;
   const {
     data,
     setData,
@@ -21,7 +24,7 @@ export default function EditUserPage() {
     validateForm,
     onSubmit,
   } = useForm(initialEditForm, editSchema, (newUser) => {
-    handleUpdateUser(newUser);
+    handleUpdateUser(user, newUser);
   });
 
   useEffect(() => {

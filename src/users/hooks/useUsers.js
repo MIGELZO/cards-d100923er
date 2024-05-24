@@ -1,10 +1,12 @@
 import { useCallback, useState } from "react";
 import { useUser } from "../providers/UserProvider";
 import {
+  getAllUsers,
   getUserData,
   loginService,
   signUpService,
   updateUser,
+  updateUserBusinessStatus,
 } from "../services/usersApiService";
 import {
   getUser,
@@ -21,7 +23,7 @@ export default function useUsers() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState();
-  const { setUser, setToken, user } = useUser();
+  const { setUser, setToken } = useUser();
   const { snackbarActivation } = useSnackbar();
   const [existingUser, setExistingUser] = useState([]);
 
@@ -57,8 +59,8 @@ export default function useUsers() {
     removeTokenFromLocalStorage();
     setUser(null);
     snackbarActivation("success", "LOGGEDOUT Succesfuly", "filled");
-    window.location.reload();
-  }, [setUser, snackbarActivation]);
+    navigate(ROUTES.ROOT);
+  }, [setUser, snackbarActivation, navigate]);
 
   const handleSignup = useCallback(
     async (userFromClient) => {
@@ -94,7 +96,7 @@ export default function useUsers() {
   }, []);
 
   const handleUpdateUser = useCallback(
-    async (userFromClient) => {
+    async (user, userFromClient) => {
       setIsLoading(true);
 
       try {
@@ -107,15 +109,61 @@ export default function useUsers() {
           "success",
           `${normalizedUser.name.first} your details has been successfully updated`
         );
-        setTimeout(() => {
-          navigate(ROUTES.ROOT);
-        }, 1000);
+      } catch (error) {
+        setError(error.message);
+      }
+      navigate(ROUTES.ROOT);
+      setIsLoading(false);
+    },
+    [snackbarActivation, navigate]
+  );
+
+  const handleGetAllUsers = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const usersData = await getAllUsers();
+      setIsLoading(false);
+      return usersData;
+    } catch (err) {
+      setError(err.message);
+    }
+    setIsLoading(false);
+  }, []);
+
+  const handleChangeBusinessStatus = useCallback(
+    async (user) => {
+      try {
+        const usersData = await updateUserBusinessStatus(user._id);
+        snackbarActivation(
+          "success",
+          `Business Status of User ${user.name.first} was changed sucessfully`
+        );
+        return usersData;
+      } catch (err) {
+        setError(err.message);
+      }
+    },
+    [snackbarActivation]
+  );
+
+  const handleDeleteUser = useCallback(
+    async (user) => {
+      setIsLoading(true);
+
+      try {
+        const data = await updateUser(user._id);
+        snackbarActivation(
+          "success",
+          `You deleted user:${user.name.first} successfully`
+        );
+        return data;
       } catch (error) {
         setError(error.message);
       }
       setIsLoading(false);
+      handleGetAllUsers();
     },
-    [snackbarActivation, navigate, user._id]
+    [snackbarActivation, handleGetAllUsers]
   );
 
   return {
@@ -128,5 +176,8 @@ export default function useUsers() {
     handleGetUser,
     handleUpdateUser,
     setExistingUser,
+    handleGetAllUsers,
+    handleChangeBusinessStatus,
+    handleDeleteUser,
   };
 }

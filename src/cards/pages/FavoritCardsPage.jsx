@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PageHeader from "../../components/PageHeader";
 import CardsFeedBack from "../components/CardsFeedBack";
 import useCards from "../hooks/useCards";
@@ -6,16 +6,28 @@ import AddNewCardButton from "../components/AddNewCardButton";
 import { Navigate } from "react-router-dom";
 import ROUTES from "../../routs/routsModel";
 import { useUser } from "../../users/providers/UserProvider";
+import Spinner from "../../components/Spinner";
 
 export default function FavoritCardsPage() {
   const { user } = useUser();
 
   const { value, handleCardDelete, handleCardLike, getAllCards } = useCards();
   const { isLoading, error, filteredCards } = value;
+  const [isUserChecked, setIsUserChecked] = useState(false);
 
   useEffect(() => {
     getAllCards();
   }, [getAllCards]);
+
+  useEffect(() => {
+    if (user !== undefined) {
+      setIsUserChecked(true);
+    }
+  }, [user]);
+
+  if (!isUserChecked) {
+    return <Spinner />;
+  }
 
   if (!user) return <Navigate to={ROUTES.ROOT} replace />;
 

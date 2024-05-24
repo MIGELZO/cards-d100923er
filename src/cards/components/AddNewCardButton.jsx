@@ -4,7 +4,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routs/routsModel";
 
-
 export default function AddNewCardButton() {
   const navigate = useNavigate();
   return (

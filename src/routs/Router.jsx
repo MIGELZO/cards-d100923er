@@ -21,6 +21,7 @@ import EditCardPage from "../cards/pages/EditCardPage";
 import MyCardsPage from "../cards/pages/MyCardsPage";
 import FavoritCardsPage from "../cards/pages/FavoritCardsPage";
 import EditUserPage from "../users/pages/EditUserPage";
+import UsersTable from "../sandBox/UsersTable";
 
 export default function Router() {
   return (
@@ -45,6 +46,7 @@ export default function Router() {
         <Route path="ResizedWindow" element={<ResizedWindow />} />
         <Route path="optimization" element={<ParentComponent />} />
         <Route path="context" element={<ParentComponentPage />} />
+        <Route path="users-table" element={<UsersTable />} />
       </Route>
       <Route path="*" element={<ErrorPage />} />
     </Routes>
