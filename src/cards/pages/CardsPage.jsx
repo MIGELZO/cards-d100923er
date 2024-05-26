@@ -7,7 +7,7 @@ import { useUser } from "../../users/providers/UserProvider";
 
 export default function CardPage() {
   const { value, handleCardDelete, handleCardLike, getAllCards } = useCards();
-  const { isLoading, error, filteredCards } = value;
+  const { isLoading, error, filteredCards, filterCount } = value;
 
   useEffect(() => {
     getAllCards();
@@ -21,12 +21,14 @@ export default function CardPage() {
         title="Cards"
         subtitle="On this page you can find all bussines cards from all categories"
       />
+
       <CardsFeedBack
         cardsList={filteredCards}
         handleCardDelete={handleCardDelete}
         handleCardLike={handleCardLike}
         isLoading={isLoading}
         error={error}
+        count={filterCount}
       />
       {user && (user.isAdmin === true || user.isBusiness === true) ? (
         <AddNewCardButton />

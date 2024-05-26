@@ -56,12 +56,26 @@ export default function CardActionBar({
     navigate(ROUTES.EDIT_CARD + "/" + id);
   };
 
+  const confirmDelete = () => {
+    handleCardDelete(cardId);
+    snackbarActivation("info", `${cardTitle} has been deleted`);
+  };
+
   return (
     <CardActions sx={{ paddingTop: 0, justifyContent: "space-between" }}>
       <Box>
         {user && (user.isAdmin || user._id === userId) ? (
           <>
-            <IconButton onClick={() => handleCardDelete(cardId)}>
+            <IconButton
+              onClick={() =>
+                alertActivation(
+                  "warning",
+                  "Delete Confirmation",
+                  `Are you sure you want to delete ${cardTitle}?`,
+                  confirmDelete
+                )
+              }
+            >
               <DeleteIcon />
             </IconButton>
             <IconButton onClick={() => handleCardEdit(cardId)}>

@@ -16,6 +16,7 @@ const Form = ({
   spacing = 1,
   styles = {},
   children,
+  onDelete = null,
 }) => {
   const navigate = useNavigate();
 
@@ -36,8 +37,15 @@ const Form = ({
         {children}
       </Grid>
 
-      <Grid container spacing={1} my={2} direction="row" width="100">
-        <Grid item xs={12} sm={6}>
+      <Grid
+        container
+        spacing={1}
+        my={2}
+        direction="row"
+        width="100"
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
+        <Grid item xs={12} sm={4}>
           <FormButton
             node="cancel"
             color="error"
@@ -46,7 +54,7 @@ const Form = ({
             onClick={() => navigate(to)}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={4}>
           <FormButton
             node={<LoopIcon />}
             variant="outlined"
@@ -54,6 +62,11 @@ const Form = ({
             onClick={onReset}
           />
         </Grid>
+        {onDelete ? (
+          <Grid item xs={12} sm={4}>
+            <FormButton node="Delete card" color="error" onClick={onDelete} />
+          </Grid>
+        ) : null}
         <Grid item xs={12}>
           <FormButton
             node="Submit"

@@ -9,11 +9,12 @@ import {
   getLocationCoordinate,
 } from "../services/cardsApiService";
 import { useSnackbar } from "../../providers/SnackbarProvider";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import ROUTES from "../../routs/routsModel";
 import normalizeCard from "../helpers/normalization/normalizeCard";
 import useAxios from "../../hooks/useAxios";
 import normalizeAddress from "../helpers/normalization/normalizeAddress";
+import { useUser } from "../../users/providers/UserProvider";
 
 export default function useCards(id) {
   const [cardsList, setCardsList] = useState([]);
@@ -25,7 +26,10 @@ export default function useCards(id) {
   const [query, setQuery] = useState("");
   const [filteredCards, setFilter] = useState(null);
   const [searchParams] = useSearchParams();
+  const [filterCount, setfilterCount] = useState();
   const navigate = useNavigate();
+  const { user } = useUser();
+  const location = useLocation();
 
   useAxios();
 
@@ -34,15 +38,40 @@ export default function useCards(id) {
   }, [searchParams]);
 
   useEffect(() => {
+    const getFilteredCards = () => {
+      if (user) {
+        switch (location.pathname) {
+          case "/my-cards":
+            return cardsList.filter((card) => card.user_id === user._id);
+          case "/fav-cards":
+            return cardsList.filter((card) => card.likes.includes(user._id));
+          default:
+            return cardsList;
+        }
+      }
+      return cardsList;
+    };
     if (cardsList) {
+      const cards1 = getFilteredCards();
       setFilter(
-        cardsList.filter(
+        cards1.filter(
           (card) =>
-            card.title.includes(query) || String(card.bizNumber).includes(query)
+            card.title.includes(query) ||
+            String(card.bizNumber).includes(query) ||
+            card.phone.includes(query) ||
+            card.email.includes(query) ||
+            card.subtitle.includes(query) ||
+            card.address.city.includes(query)
         )
       );
     }
-  }, [cardsList, query]);
+  }, [cardsList, query, location.pathname, user]);
+
+  useEffect(() => {
+    if (filteredCards !== null && filteredCards.length >= 0) {
+      setfilterCount(filteredCards.length);
+    }
+  }, [filteredCards]);
 
   const getAllCards = useCallback(async () => {
     try {
@@ -153,8 +182,15 @@ export default function useCards(id) {
   }, []);
 
   const value = useMemo(() => {
-    return { cardData, isLoading, error, cardsList, filteredCards };
-  }, [cardData, isLoading, error, cardsList, filteredCards]);
+    return {
+      cardData,
+      isLoading,
+      error,
+      cardsList,
+      filteredCards,
+      filterCount,
+    };
+  }, [cardData, isLoading, error, cardsList, filteredCards, filterCount]);
 
   return {
     value,

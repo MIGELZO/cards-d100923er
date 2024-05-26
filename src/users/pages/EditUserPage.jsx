@@ -9,6 +9,7 @@ import userToModel from "../helpers/initialForms/userToModel";
 import { Navigate } from "react-router-dom";
 import ROUTES from "../../routs/routsModel";
 import { getUser } from "../services/localStorageService";
+import { useAlert } from "../../providers/AlertProvider";
 
 export default function EditUserPage() {
   const { handleUpdateUser, handleGetUser } = useUsers();
@@ -26,6 +27,7 @@ export default function EditUserPage() {
   } = useForm(initialEditForm, editSchema, (newUser) => {
     handleUpdateUser(user, newUser);
   });
+  const { alertActivation } = useAlert();
 
   useEffect(() => {
     handleGetUser(user._id).then((data) => {
@@ -33,6 +35,10 @@ export default function EditUserPage() {
       setData(modelUser);
     });
   }, [handleGetUser, setData, user._id]);
+
+  const confirmEdit = () => {
+    onSubmit(onSubmit);
+  };
 
   return (
     <Container
@@ -44,7 +50,14 @@ export default function EditUserPage() {
       }}
     >
       <EditForm
-        onSubmit={onSubmit}
+        onSubmit={() => {
+          alertActivation(
+            "info",
+            "Edit Confirmation",
+            "Are you sure you want to save changes?",
+            confirmEdit
+          );
+        }}
         onReset={handleReset}
         validateForm={validateForm}
         title={"edit form"}

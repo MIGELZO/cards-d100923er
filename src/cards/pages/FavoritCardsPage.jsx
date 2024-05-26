@@ -12,7 +12,7 @@ export default function FavoritCardsPage() {
   const { user } = useUser();
 
   const { value, handleCardDelete, handleCardLike, getAllCards } = useCards();
-  const { isLoading, error, filteredCards } = value;
+  const { isLoading, error, filteredCards, filterCount } = value;
   const [isUserChecked, setIsUserChecked] = useState(false);
 
   useEffect(() => {
@@ -43,6 +43,7 @@ export default function FavoritCardsPage() {
         handleCardLike={handleCardLike}
         isLoading={isLoading}
         error={error}
+        count={filterCount}
       />
       <AddNewCardButton />
     </div>

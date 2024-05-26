@@ -160,10 +160,11 @@ export default function useUsers() {
       } catch (error) {
         setError(error.message);
       }
-      setIsLoading(false);
-      handleGetAllUsers();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     },
-    [snackbarActivation, handleGetAllUsers]
+    [snackbarActivation]
   );
 
   return {

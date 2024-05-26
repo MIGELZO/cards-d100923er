@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useAlert } from "../providers/AlertProvider";
 
 export default function UsersTableContent({
   user,
@@ -19,6 +20,17 @@ export default function UsersTableContent({
   const toggleBusiness = () => {
     setCheckedStatus(!checkedStatus);
     handleChangeCheckBox(user);
+  };
+
+  const { alertActivation } = useAlert();
+
+  const confirmDelete = () => {
+    alertActivation(
+      "info",
+      "Delete Confirmation",
+      `Are you sure you want to delete ${user.name.first} ${user.name.last}?`,
+      () => handleDeleteUser(user)
+    );
   };
   return (
     <TableRow key={user._id}>
@@ -68,7 +80,7 @@ export default function UsersTableContent({
       <TableCell>
         <Fab
           disabled={user.isAdmin}
-          onClick={() => handleDeleteUser(user)}
+          onClick={confirmDelete}
           sx={{ color: "red" }}
         >
           <DeleteIcon />

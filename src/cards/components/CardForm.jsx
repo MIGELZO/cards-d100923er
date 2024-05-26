@@ -11,6 +11,7 @@ const CardForm = ({
   onInputChange,
   data,
   title,
+  onDelete,
 }) => {
   return (
     <Form
@@ -21,6 +22,7 @@ const CardForm = ({
       styles={{ maxWidth: "800px" }}
       title={title}
       to={ROUTES.ROOT}
+      onDelete={onDelete}
     >
       <Input
         name="title"

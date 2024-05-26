@@ -11,7 +11,7 @@ import Spinner from "../../components/Spinner";
 export default function MyCardsPage() {
   const { value, handleCardDelete, handleCardLike, getAllCards } = useCards();
 
-  const { isLoading, error, filteredCards } = value;
+  const { isLoading, error, filteredCards, filterCount } = value;
 
   const { user } = useUser();
   const [isUserChecked, setIsUserChecked] = useState(false);
@@ -44,6 +44,7 @@ export default function MyCardsPage() {
         handleCardLike={handleCardLike}
         isLoading={isLoading}
         error={error}
+        count={filterCount}
       />
       <AddNewCardButton />
     </div>
