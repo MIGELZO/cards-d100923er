@@ -69,7 +69,7 @@ export default function CardActionBar({
             <IconButton
               onClick={() =>
                 alertActivation(
-                  "warning",
+                  "error",
                   "Delete Confirmation",
                   `Are you sure you want to delete ${cardTitle}?`,
                   confirmDelete

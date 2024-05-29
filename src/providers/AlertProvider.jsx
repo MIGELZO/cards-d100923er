@@ -39,20 +39,25 @@ export default function AlertProvider({ children }) {
         {children}
       </AlertContext.Provider>
       <Backdrop open={open} sx={{ zIndex: 1 }}>
-        <Stack
-          sx={{ width: "20%", position: "reletive", zIndex: 2 }}
-          spacing={2}
-        >
-          <Alert severity={color}>
+        <Stack sx={{ width: 350, position: "reletive", zIndex: 2 }} spacing={2}>
+          <Alert severity={color} variant="filled">
             <AlertTitle>{title}</AlertTitle>
             {message}
-            <Box sx={{ display: "flex" }}>
+            <br />
+            <br />
+            <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
               {operation ? (
-                <Button color="inherit" size="small" onClick={handleOk}>
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  size="small"
+                  onClick={handleOk}
+                >
                   OK
                 </Button>
               ) : (
                 <Button
+                  variant="outlined"
                   color="inherit"
                   size="small"
                   onClick={handleCopyToClipboard}
@@ -60,7 +65,12 @@ export default function AlertProvider({ children }) {
                   Copy
                 </Button>
               )}
-              <Button color="inherit" size="small" onClick={handleClose}>
+              <Button
+                variant="outlined"
+                color="inherit"
+                size="small"
+                onClick={handleClose}
+              >
                 {!operation ? "ok" : "cancel"}
               </Button>
             </Box>
