@@ -1,10 +1,12 @@
 import React from "react";
 import {
+  Box,
   CardContent,
   CardHeader,
   Divider,
   Typography,
 } from "@mui/material";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
 export default function CardBody({
   title,
@@ -12,11 +14,17 @@ export default function CardBody({
   phone,
   address,
   cardNumber,
+  cardLikes,
 }) {
   return (
-    <>
+    <Box sx={{ height: 250 }}>
       <CardHeader title={title} subheader={subtitle} />
-      <Divider variant="middle" />
+      <Divider variant="middle" textAlign="right">
+        <strong>
+          <ThumbUpIcon fontSize="small" />
+          {cardLikes}
+        </strong>
+      </Divider>
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           <strong>Phone: </strong>
@@ -31,6 +39,6 @@ export default function CardBody({
           {cardNumber}
         </Typography>
       </CardContent>
-    </>
+    </Box>
   );
 }

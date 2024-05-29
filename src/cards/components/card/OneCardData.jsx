@@ -1,6 +1,6 @@
 import {
-  Avatar,
   Box,
+  CardMedia,
   Table,
   TableCell,
   TableContainer,
@@ -10,13 +10,33 @@ import {
 } from "@mui/material";
 
 export default function OneCardData({ cardData }) {
+  const formatUrl = (url) => {
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      return "http://" + url;
+    }
+    return url;
+  };
 
   return (
     <Box>
-      <Avatar src={cardData.image.url} alt={cardData.image.alt} />
+      <Box style={{ maxWidth: "100%", maxHeight: 400, overflow: "hidden" }}>
+        <CardMedia
+          component="img"
+          image={cardData.image.url}
+          alt={cardData.image.alt}
+        />
+      </Box>
       <TableContainer>
         <Table>
           <TableHead>
+            <TableRow>
+              <TableCell>
+                Description:
+                <Typography variant="h4" gutterBottom>
+                  {cardData.description}
+                </Typography>
+              </TableCell>
+            </TableRow>
             <TableRow>
               <TableCell>
                 Title:<Typography>{cardData.title}</Typography>
@@ -25,6 +45,16 @@ export default function OneCardData({ cardData }) {
             <TableRow>
               <TableCell>
                 Subtitle:<Typography>{cardData.subtitle}</Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                Business Number:<Typography>{cardData.bizNumber}</Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                Likes:<Typography>{cardData.likes.length}</Typography>
               </TableCell>
             </TableRow>
             <TableRow>
@@ -39,7 +69,17 @@ export default function OneCardData({ cardData }) {
             </TableRow>
             <TableRow>
               <TableCell>
-                Website:<Typography>{cardData.web}</Typography>
+                Website:
+                <Typography>
+                  {" "}
+                  <a
+                    href={formatUrl(cardData.web)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {cardData.web}
+                  </a>
+                </Typography>
               </TableCell>
             </TableRow>
           </TableHead>

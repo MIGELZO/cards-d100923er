@@ -20,6 +20,7 @@ function CardComponent({ card, handleCardDelete, handleCardLike }) {
           phone={card.phone}
           address={card.address}
           cardNumber={card.bizNumber}
+          cardLikes={card.likes.length}
         />
       </CardActionArea>
       <CardActionBar
