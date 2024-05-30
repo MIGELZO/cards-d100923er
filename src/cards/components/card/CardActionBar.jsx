@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, IconButton, CardActions } from "@mui/material";
+import { Box, IconButton, CardActions, Tooltip, Zoom } from "@mui/material";
 import Favorite from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
@@ -76,10 +76,14 @@ export default function CardActionBar({
                 )
               }
             >
-              <DeleteIcon />
+              <Tooltip title="Delete" TransitionComponent={Zoom} arrow>
+                <DeleteIcon />
+              </Tooltip>
             </IconButton>
             <IconButton onClick={() => handleCardEdit(cardId)}>
-              <ModeEditIcon />
+              <Tooltip title="Edit" TransitionComponent={Zoom} arrow>
+                <ModeEditIcon />
+              </Tooltip>
             </IconButton>
           </>
         ) : null}
@@ -94,11 +98,21 @@ export default function CardActionBar({
             )
           }
         >
-          <CallIcon />
+          <Tooltip title="Call" TransitionComponent={Zoom} arrow>
+            <CallIcon />
+          </Tooltip>
         </IconButton>
         {user ? (
           <IconButton onClick={toggleLike}>
-            {liked ? <Favorite sx={{ color: "red" }} /> : <Favorite />}
+            {liked ? (
+              <Tooltip title="Dislike" TransitionComponent={Zoom} arrow>
+                <Favorite sx={{ color: "red" }} />
+              </Tooltip>
+            ) : (
+              <Tooltip title="Like" TransitionComponent={Zoom} arrow>
+                <Favorite />
+              </Tooltip>
+            )}
           </IconButton>
         ) : null}
       </Box>

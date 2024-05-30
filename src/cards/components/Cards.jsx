@@ -4,7 +4,14 @@ import CardComponent from "./card/CardComponent";
 
 export default function Cards({ cardsList, handleCardDelete, handleCardLike }) {
   return (
-    <Container sx={{ display: "flex", flexWrap: "wrap" }}>
+    <Container
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       {cardsList.map((card) => (
         <CardComponent
           key={card._id}

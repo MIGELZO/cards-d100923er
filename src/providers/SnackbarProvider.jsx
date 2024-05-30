@@ -29,8 +29,8 @@ export default function SnackbarProvider({ children }) {
       <SnackbarContext.Provider value={{ snackbarActivation }}>
         {children}
       </SnackbarContext.Provider>
-      
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+
+      <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
         <Alert
           onClose={handleClose}
           severity={color}

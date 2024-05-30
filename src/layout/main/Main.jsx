@@ -10,7 +10,8 @@ export default function Main({ children }) {
       sx={{
         minHeight: "85vh",
         backgroundColor: isDark ? "#333333" : "#e3f2fd",
-        color: isDark ? "white" : "black"
+        color: isDark ? "white" : "black",
+        textAlign: "center",
       }}
     >
       {children}

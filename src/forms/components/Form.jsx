@@ -5,6 +5,7 @@ import FormButton from "./FormButton";
 import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import LoopIcon from "@mui/icons-material/Loop";
+import { Tooltip, Zoom } from "@mui/material";
 
 const Form = ({
   title = "",
@@ -54,14 +55,21 @@ const Form = ({
             onClick={() => navigate(to)}
           />
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <FormButton
-            node={<LoopIcon />}
-            variant="outlined"
-            component="div"
-            onClick={onReset}
-          />
-        </Grid>
+        <Tooltip
+          title="Clear Fields"
+          TransitionComponent={Zoom}
+          arrow
+          followCursor
+        >
+          <Grid item xs={12} sm={4}>
+            <FormButton
+              node={<LoopIcon />}
+              variant="outlined"
+              component="div"
+              onClick={onReset}
+            />
+          </Grid>
+        </Tooltip>
         {onDelete ? (
           <Grid item xs={12} sm={4}>
             <FormButton node="Delete card" color="error" onClick={onDelete} />

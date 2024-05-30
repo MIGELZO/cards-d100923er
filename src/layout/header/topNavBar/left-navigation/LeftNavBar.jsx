@@ -10,16 +10,28 @@ export default function LeftNavBar() {
   const { user } = useUser();
 
   return (
-    <Box>
+    <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
       <LogoIcon />
       <Logo />
-      <NavItem to={ROUTES.ABOUT} lable={"About"} />
-      <NavItem to={ROUTES.CARDS} lable={"Card"} />
-      {user && (user.isAdmin || user.isBusiness === true) ? (
-        <NavItem to={ROUTES.MY_CARDS} lable={"my cards"} />
+      <NavItem to={ROUTES.CARDS} lable={"Cards"} />
+      <Box
+        sx={{
+          display: { xs: "none", md: "flex" },
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <NavItem to={ROUTES.ABOUT} lable={"About"} />
+        {user && (user.isAdmin || user.isBusiness === true) ? (
+          <NavItem to={ROUTES.MY_CARDS} lable={"my cards"} />
+        ) : null}
+        {user ? (
+          <NavItem to={ROUTES.FAV_CARDS} lable={"favorit cards"} />
+        ) : null}
+      </Box>
+      {user && user.isAdmin ? (
+        <NavItem to="users-table" lable={"user table"} />
       ) : null}
-      {user ? <NavItem to={ROUTES.FAV_CARDS} lable={"favorit cards"} /> : null}
-      <NavItem to={ROUTES.SANDBOX} lable={"Sandbox"} />
     </Box>
   );
 }

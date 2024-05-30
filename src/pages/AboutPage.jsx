@@ -1,8 +1,17 @@
 import React, { useState } from "react";
-import { Typography, Box, Container, TextField, Button } from "@mui/material";
+import {
+  Typography,
+  Box,
+  Container,
+  TextField,
+  Button,
+  Divider,
+} from "@mui/material";
 import PageHeader from "../components/PageHeader";
+import { useSnackbar } from "../providers/SnackbarProvider";
 
 export default function AboutPage() {
+  const { snackbarActivation } = useSnackbar();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,6 +36,10 @@ export default function AboutPage() {
       email: "",
       message: "",
     });
+    snackbarActivation(
+      "success",
+      "Thank you for reaching out. We'll make sure to get in touch with you as soon as possible."
+    );
   };
 
   return (
@@ -35,7 +48,7 @@ export default function AboutPage() {
         title="About Our Application"
         subtitle="Explore detailed explanations about the functionalities and usage of our application"
       />
-      <Container>
+      <Container sx={{ textAlign: "left" }}>
         <Box sx={{ padding: 2 }}>
           <Typography variant="h4" gutterBottom>
             Overview
@@ -175,11 +188,13 @@ export default function AboutPage() {
         </Box>
       </Container>
 
-      <Box sx={{ bgcolor: "#f5f5f5", p: 3, mt: 4 }}>
+      <Box sx={{ p: 3, mt: 4 }}>
         <Container>
-          <Typography variant="h4" gutterBottom>
-            Contact Us
-          </Typography>
+          <Divider>
+            <Typography variant="h4" gutterBottom>
+              Contact Us
+            </Typography>
+          </Divider>
           <Typography paragraph>
             If you have any questions or need further assistance, please don't
             hesitate to reach out.

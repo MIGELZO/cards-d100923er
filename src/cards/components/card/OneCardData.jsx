@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   CardMedia,
   Table,
   TableCell,
@@ -54,6 +55,21 @@ export default function OneCardData({ cardData }) {
             </TableRow>
             <TableRow>
               <TableCell>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  component="a"
+                  href={formatUrl(cardData.web)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{ marginLeft: 1 }}
+                >
+                  Go to Website
+                </Button>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
                 Likes:<Typography>{cardData.likes.length}</Typography>
               </TableCell>
             </TableRow>
@@ -65,21 +81,6 @@ export default function OneCardData({ cardData }) {
             <TableRow>
               <TableCell>
                 Phone:<Typography>{cardData.phone}</Typography>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                Website:
-                <Typography>
-                  {" "}
-                  <a
-                    href={formatUrl(cardData.web)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {cardData.web}
-                  </a>
-                </Typography>
               </TableCell>
             </TableRow>
           </TableHead>

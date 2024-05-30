@@ -38,6 +38,7 @@ export default function Router() {
       <Route path={ROUTES.CREATE_CARD} element={<AddCardPage />} />
       <Route path={ROUTES.EDIT_CARD + "/:id"} element={<EditCardPage />} />
       <Route path={ROUTES.USER_PROFILE} element={<ProfilePage />} />
+      <Route path="users-table" element={<UsersTable />} />
       <Route path={ROUTES.SANDBOX} element={<SendBox />}>
         <Route path="counter" element={<Counter />} />
         <Route path="LifeCycle" element={<LifeCycle />} />
@@ -46,7 +47,6 @@ export default function Router() {
         <Route path="ResizedWindow" element={<ResizedWindow />} />
         <Route path="optimization" element={<ParentComponent />} />
         <Route path="context" element={<ParentComponentPage />} />
-        <Route path="users-table" element={<UsersTable />} />
       </Route>
       <Route path="*" element={<ErrorPage />} />
     </Routes>

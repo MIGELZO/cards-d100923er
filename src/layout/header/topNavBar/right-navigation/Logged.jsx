@@ -3,11 +3,12 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import { useMenu } from "../menu/MenuProvider";
+import { Zoom } from "@mui/material";
 
 const Logged = ({ userData }) => {
   const setOpen = useMenu();
   return (
-    <Tooltip title="Open settings">
+    <Tooltip title="Open Menu" TransitionComponent={Zoom} arrow>
       <IconButton
         sx={{ p: 0, display: "inline-flex", marginLeft: 2 }}
         onClick={() => setOpen(true)}

@@ -1,5 +1,7 @@
 import { Alert, AlertTitle, Backdrop, Box, Button, Stack } from "@mui/material";
 import React, { createContext, useCallback, useContext, useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useSnackbar } from "./SnackbarProvider";
 
 const AlertContext = createContext();
 
@@ -9,10 +11,10 @@ export default function AlertProvider({ children }) {
   const [title, setTitle] = useState("Info");
   const [message, setMessage] = useState("");
   const [operation, setOperation] = useState(null);
+  const { snackbarActivation } = useSnackbar();
 
   const handleClose = () => {
     setOpen(false);
-    setOperation(null);
   };
 
   const handleOk = () => {
@@ -20,7 +22,10 @@ export default function AlertProvider({ children }) {
     handleClose();
   };
 
-  const handleCopyToClipboard = () => {};
+  const handleCopyToClipboard = () => {
+    handleClose();
+    snackbarActivation("info", "copied to Clipboard");
+  };
 
   const alertActivation = useCallback(
     (color, title, message, operation = null) => {
@@ -56,14 +61,11 @@ export default function AlertProvider({ children }) {
                   OK
                 </Button>
               ) : (
-                <Button
-                  variant="outlined"
-                  color="inherit"
-                  size="small"
-                  onClick={handleCopyToClipboard}
-                >
-                  Copy
-                </Button>
+                <CopyToClipboard text={message} onCopy={handleCopyToClipboard}>
+                  <Button variant="outlined" color="inherit" size="small">
+                    Copy
+                  </Button>
+                </CopyToClipboard>
               )}
               <Button
                 variant="outlined"

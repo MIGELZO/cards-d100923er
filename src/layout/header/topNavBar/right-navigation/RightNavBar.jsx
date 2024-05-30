@@ -1,21 +1,20 @@
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Tooltip, Zoom } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useUser } from "../../../../users/providers/UserProvider";
 import Logged from "./Logged";
 import NotLogged from "./NotLogged";
 import { useTheme } from "../../../../providers/CustomThemeProvider";
-import MoreButton from "./MoreButton";
-import SearchBar from "./ShearchBar";
 import { useLocation } from "react-router-dom";
 import useUsers from "../../../../users/hooks/useUsers";
+import SearchBar from "./SearchBar";
 
 export default function RightNavBar() {
-  const { user } = useUser();
   const { isDark, toggleDarkMode } = useTheme();
+  const { user } = useUser();
   const location = useLocation();
-  const { handleGetUser, handleUpdateUser } = useUsers();
+  const { handleGetUser, handleEdit } = useUsers();
   const [userData, setUserData] = useState(false);
 
   useEffect(() => {
@@ -24,31 +23,37 @@ export default function RightNavBar() {
           setUserData(data);
         })
       : setUserData(false);
-  }, [handleGetUser, user, handleUpdateUser]);
+  }, [handleGetUser, user, handleEdit]);
 
   return (
-    <>
+    <Box sx={{ display: "flex", flexDirection: "row" }}>
       <Box
         sx={{
           display: { xs: "none", md: "inline-flex" },
           alignItems: "center",
         }}
       >
-        {location.pathname === "/" ||
-        location.pathname === "/cards" ||
+        {location.pathname === "/cards" ||
+        location.pathname === "/" ||
         location.pathname === "/my-cards" ||
         location.pathname === "/fav-cards" ? (
           <SearchBar />
         ) : null}
-
-        <IconButton sx={{ ml: 1 }} onClick={toggleDarkMode}>
-          {isDark ? <LightModeIcon /> : <DarkModeIcon />}
-        </IconButton>
-
-        {user && <Logged userData={userData} />}
-        {!user && <NotLogged />}
       </Box>
-      <MoreButton sx={{ display: { md: "none", sx: "inline-flex" } }} />
-    </>
+
+      <IconButton sx={{ ml: 1 }} onClick={toggleDarkMode}>
+        {isDark ? (
+          <Tooltip title="Light Mode" TransitionComponent={Zoom} arrow>
+            <LightModeIcon />
+          </Tooltip>
+        ) : (
+          <Tooltip title="Light Mode" TransitionComponent={Zoom} arrow>
+            <DarkModeIcon />
+          </Tooltip>
+        )}
+      </IconButton>
+      {user && <Logged userData={userData} />}
+      {!user && <NotLogged />}
+    </Box>
   );
 }

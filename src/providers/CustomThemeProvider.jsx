@@ -14,6 +14,20 @@ export default function CustomThemeProvider({ children }) {
     palette: {
       mode: isDark ? "dark" : "light",
     },
+    typography: {
+      h3: {
+        fontSize: "3rem",
+        "@media (max-width:480px)": {
+          fontSize: "1.75rem",
+        },
+      },
+      h5: {
+        fontSize: "1.5rem",
+        "@media (max-width:480px)": {
+          fontSize: "1rem",
+        },
+      },
+    },
   });
 
   return (

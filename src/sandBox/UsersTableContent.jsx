@@ -6,7 +6,9 @@ import {
   FormControlLabel,
   TableCell,
   TableRow,
+  Tooltip,
   Typography,
+  Zoom,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useAlert } from "../providers/AlertProvider";
@@ -83,7 +85,9 @@ export default function UsersTableContent({
           onClick={confirmDelete}
           sx={{ color: "red" }}
         >
-          <DeleteIcon />
+          <Tooltip title="Delete" TransitionComponent={Zoom} arrow>
+            <DeleteIcon />
+          </Tooltip>
         </Fab>
       </TableCell>
     </TableRow>

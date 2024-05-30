@@ -4,7 +4,7 @@ import React from "react";
 export default function PageHeader({ title, subtitle }) {
   return (
     <Box>
-      <Typography variant="h2" component="h1">
+      <Typography variant="h3" component="h1">
         {title}
       </Typography>
       <Typography variant="h5" component="h2">

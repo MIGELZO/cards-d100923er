@@ -14,7 +14,7 @@ export default function Logo() {
           color: isDark ? "white" : "black",
           fontFamily: "fantasy",
           mr: 2,
-          display: { xs: "none", md: "inline-flex" },
+          display: { xs: "none", sm: "inline-flex" },
         }}
       >
         BizCard

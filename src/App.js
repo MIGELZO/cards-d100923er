@@ -11,15 +11,15 @@ function App() {
   return (
     <BrowserRouter>
       <UserProvider>
-        <AlertProvider>
-          <SnackbarProvider>
+        <SnackbarProvider>
+          <AlertProvider>
             <CustomThemeProvider>
               <Layout>
                 <Router />
               </Layout>
             </CustomThemeProvider>
-          </SnackbarProvider>
-        </AlertProvider>
+          </AlertProvider>
+        </SnackbarProvider>
       </UserProvider>
     </BrowserRouter>
   );
