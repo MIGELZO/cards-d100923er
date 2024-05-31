@@ -21,13 +21,12 @@ import { useEffect } from "react";
 export default function ProfilePage() {
   const { handleGetUser, error, isLoading } = useUsers();
   const navigate = useNavigate();
-  const [userData, setUserData] = useState()
- 
+  const [userData, setUserData] = useState();
 
   useEffect(() => {
     const user = getUser();
     if (!user) {
-      return navigate(ROUTES.CARDS);
+      return navigate(ROUTES.ROOT);
     }
     const getData = async () => {
       setUserData(await handleGetUser(user._id));

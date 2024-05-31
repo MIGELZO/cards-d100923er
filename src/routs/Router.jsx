@@ -22,11 +22,12 @@ import MyCardsPage from "../cards/pages/MyCardsPage";
 import FavoritCardsPage from "../cards/pages/FavoritCardsPage";
 import EditUserPage from "../users/pages/EditUserPage";
 import UsersTable from "../sandBox/UsersTable";
+import HomePage from "../pages/HomePage";
 
 export default function Router() {
   return (
     <Routes>
-      <Route path={ROUTES.ROOT} element={<CardsPage />} />
+      <Route path={ROUTES.ROOT} element={<HomePage />} />
       <Route path={ROUTES.CARDS} element={<CardsPage />} />
       <Route path={ROUTES.MY_CARDS} element={<MyCardsPage />} />
       <Route path={ROUTES.FAV_CARDS} element={<FavoritCardsPage />} />

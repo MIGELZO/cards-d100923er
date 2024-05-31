@@ -47,7 +47,7 @@ export default function RightNavBar() {
             <LightModeIcon />
           </Tooltip>
         ) : (
-          <Tooltip title="Light Mode" TransitionComponent={Zoom} arrow>
+          <Tooltip title="Dark Mode" TransitionComponent={Zoom} arrow>
             <DarkModeIcon />
           </Tooltip>
         )}

@@ -35,7 +35,7 @@ export default function useUsers() {
         setTokenInLocalStorage(token);
         setToken(token);
         setUser(getUser());
-        navigate(ROUTES.CARDS);
+        navigate(ROUTES.ROOT);
         isSigned
           ? snackbarActivation(
               "success",

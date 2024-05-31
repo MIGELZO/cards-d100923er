@@ -32,7 +32,7 @@ export default function UsersTable() {
   useEffect(() => {
     const user = getUser();
     if (!user || user.isAdmin === false) {
-      return navigate(ROUTES.CARDS);
+      return navigate(ROUTES.ROOT);
     }
 
     const getData = async () => {

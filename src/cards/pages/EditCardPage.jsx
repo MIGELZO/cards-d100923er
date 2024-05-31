@@ -57,7 +57,7 @@ export default function EditCardPage() {
     setTimeout(() => window.location.replace("/cards"), 1500);
   };
 
-  if (!user) return <Navigate replace to={ROUTES.CARDS} />;
+  if (!user) return <Navigate replace to={ROUTES.ROOT} />;
 
   return (
     <Container

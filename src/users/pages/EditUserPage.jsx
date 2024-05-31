@@ -15,7 +15,7 @@ export default function EditUserPage() {
   const { handleUpdateUser, handleGetUser } = useUsers();
 
   const user = getUser();
-  if (!user) <Navigate replace to={ROUTES.CARDS} />;
+  if (!user) <Navigate replace to={ROUTES.ROOT} />;
   const {
     data,
     setData,
