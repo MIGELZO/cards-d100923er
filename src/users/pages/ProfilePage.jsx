@@ -3,7 +3,7 @@ import useUsers from "../hooks/useUsers";
 import Spinner from "../../components/Spinner";
 import {
   Avatar,
-  Box,
+  Container,
   Table,
   TableCell,
   TableContainer,
@@ -17,6 +17,8 @@ import { getUser } from "../services/localStorageService";
 import ROUTES from "../../routs/routsModel";
 import { useState } from "react";
 import { useEffect } from "react";
+import PageHeader from "../../components/PageHeader";
+import EditUserButton from "../components/EditUserButton";
 
 export default function ProfilePage() {
   const { handleGetUser, error, isLoading } = useUsers();
@@ -38,7 +40,8 @@ export default function ProfilePage() {
   if (isLoading) return <Spinner />;
   if (userData) {
     return (
-      <Box>
+      <Container>
+        <PageHeader title="User Profile" />
         <Avatar src={userData.image.url} alt={userData.image.alt} />
         <TableContainer>
           <Table>
@@ -87,7 +90,8 @@ export default function ProfilePage() {
             </TableHead>
           </Table>
         </TableContainer>
-      </Box>
+        <EditUserButton />
+      </Container>
     );
   }
 }

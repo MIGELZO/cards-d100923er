@@ -1,13 +1,19 @@
 import { Fab, Tooltip, Zoom } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routs/routsModel";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
-export default function AddNewCardButton() {
+export default function EditUserButton() {
   const navigate = useNavigate();
+
   return (
-    <Tooltip title="Add Card" TransitionComponent={Zoom} placement="left" arrow>
+    <Tooltip
+      title="Edit Account"
+      TransitionComponent={Zoom}
+      placement="left"
+      arrow
+    >
       <Fab
         color="primary"
         aria-label="add"
@@ -17,10 +23,10 @@ export default function AddNewCardButton() {
           right: 16,
         }}
         onClick={() => {
-          navigate(ROUTES.CREATE_CARD);
+          navigate(ROUTES.EDIT_USER);
         }}
       >
-        <AddIcon />
+        <ModeEditIcon />
       </Fab>
     </Tooltip>
   );

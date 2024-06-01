@@ -34,7 +34,6 @@ export default function RightNavBar() {
         }}
       >
         {location.pathname === "/cards" ||
-        location.pathname === "/" ||
         location.pathname === "/my-cards" ||
         location.pathname === "/fav-cards" ? (
           <SearchBar />

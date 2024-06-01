@@ -13,7 +13,12 @@ export default function EditCardButton({ cardId }) {
   };
 
   return (
-    <Tooltip title="Edit" TransitionComponent={Zoom} placement="left" arrow>
+    <Tooltip
+      title="Edit Card"
+      TransitionComponent={Zoom}
+      placement="left"
+      arrow
+    >
       <Fab
         color="primary"
         aria-label="add"
