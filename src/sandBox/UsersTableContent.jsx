@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import {
-  Avatar,
+  Button,
   Checkbox,
-  Fab,
   FormControlLabel,
   TableCell,
   TableRow,
@@ -36,9 +35,6 @@ export default function UsersTableContent({
   };
   return (
     <TableRow key={user._id}>
-      <TableCell>
-        <Avatar src={user.image.url} alt={user.image.alt} />
-      </TableCell>
       <TableCell sx={{ whiteSpace: "normal", wordWrap: "break-word" }}>
         <Typography>{`${user.name.first} ${user.name.middle} ${user.name.last}`}</Typography>
       </TableCell>
@@ -80,7 +76,7 @@ export default function UsersTableContent({
         />
       </TableCell>
       <TableCell>
-        <Fab
+        <Button
           disabled={user.isAdmin}
           onClick={confirmDelete}
           sx={{ color: "red" }}
@@ -88,7 +84,7 @@ export default function UsersTableContent({
           <Tooltip title="Delete" TransitionComponent={Zoom} arrow>
             <DeleteIcon />
           </Tooltip>
-        </Fab>
+        </Button>
       </TableCell>
     </TableRow>
   );

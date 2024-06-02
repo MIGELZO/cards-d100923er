@@ -55,7 +55,6 @@ export default function UsersTable() {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Avatar</TableCell>
                 <TableCell>Full Name</TableCell>
                 <TableCell>Email</TableCell>
                 <TableCell>Phone</TableCell>

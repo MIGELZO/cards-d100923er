@@ -11,7 +11,7 @@ const ROUTES = {
   LOGIN: "/login",
   USER_PROFILE: "/user-info",
   EDIT_USER: "/edit-user",
-  SANDBOX: "/sandbox",
+  // SANDBOX: "/sandbox",
 };
 
 export default ROUTES;

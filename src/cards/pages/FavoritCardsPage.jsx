@@ -20,9 +20,7 @@ export default function FavoritCardsPage() {
   }, [getAllCards]);
 
   useEffect(() => {
-    if (user !== undefined) {
-      setIsUserChecked(true);
-    }
+    setIsUserChecked(true);
   }, [user]);
 
   if (!isUserChecked) {
@@ -45,7 +43,7 @@ export default function FavoritCardsPage() {
         error={error}
         count={filterCount}
       />
-      <AddNewCardButton />
+      {user && user.isBusiness ? <AddNewCardButton /> : null}
     </div>
   );
 }

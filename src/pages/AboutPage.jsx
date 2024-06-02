@@ -50,7 +50,7 @@ export default function AboutPage() {
       />
       <Container sx={{ textAlign: "left" }}>
         <Box sx={{ padding: 2 }}>
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h3" gutterBottom>
             Overview
           </Typography>
           <Typography paragraph>
@@ -59,7 +59,7 @@ export default function AboutPage() {
             Business Cards easily and securely.
           </Typography>
 
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h3" gutterBottom>
             Mission and Vision
           </Typography>
           <Typography paragraph>
@@ -69,7 +69,7 @@ export default function AboutPage() {
             through comprehensive and interactive business cards.
           </Typography>
 
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h3" gutterBottom>
             User Types and Functionalities
           </Typography>
 
@@ -120,7 +120,7 @@ export default function AboutPage() {
             Cards.
           </Typography>
 
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h3" gutterBottom>
             Key Features
           </Typography>
 
@@ -157,7 +157,7 @@ export default function AboutPage() {
             viewing experience with dark and light modes.
           </Typography>
 
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h3" gutterBottom>
             Future Enhancements
           </Typography>
           <Typography paragraph>
@@ -166,7 +166,7 @@ export default function AboutPage() {
             functionalities!
           </Typography>
 
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h3" gutterBottom>
             Frequently Asked Questions (FAQ)
           </Typography>
           <Typography paragraph>
@@ -191,7 +191,7 @@ export default function AboutPage() {
       <Box sx={{ p: 3, mt: 4 }}>
         <Container>
           <Divider>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h3" gutterBottom>
               Contact Us
             </Typography>
           </Divider>

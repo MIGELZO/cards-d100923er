@@ -17,7 +17,6 @@ export default function NavBar() {
         </Toolbar>
 
         {location.pathname === "/cards" ||
-        location.pathname === "/" ||
         location.pathname === "/my-cards" ||
         location.pathname === "/fav-cards" ? (
           <Toolbar

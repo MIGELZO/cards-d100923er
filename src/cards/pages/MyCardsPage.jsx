@@ -21,9 +21,7 @@ export default function MyCardsPage() {
   }, [getAllCards]);
 
   useEffect(() => {
-    if (user !== undefined) {
-      setIsUserChecked(true);
-    }
+    setIsUserChecked(true);
   }, [user]);
 
   if (!isUserChecked) {
