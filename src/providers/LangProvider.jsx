@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 
+//----------------builted for future use----------------
 const LanguageContext = createContext(null);
 
 const translations = {
