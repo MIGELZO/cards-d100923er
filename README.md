@@ -105,11 +105,22 @@ Copy code
 npm start
 This will launch the application on localhost:3000.
 
-#Users
-##Admin: ###mosesadmin1@email.com (Password: Moses1234@)
-##Business User: ###daniel@tests3.com (Password: Dd1234567!)
-##Regular User: ###daniel@testss.com (Password: daniel@testss.com)
+# Users
 
-#API documentation:
-##CARDS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BE
-##USERS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BL
+## Admin:
+
+### mosesadmin1@email.com (Password: Moses1234@)
+
+## Business User:
+
+### daniel@tests3.com (Password: Dd1234567!)
+
+## Regular User:
+
+### daniel@testss.com (Password: daniel@testss.com)
+
+# API documentation:
+
+## CARDS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BE
+
+## USERS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BL
