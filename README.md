@@ -111,3 +111,7 @@ Business User:
 daniel@tests3.com (Password: Dd1234567!)
 Regular User:
 daniel@testss.com (Password: daniel@testss.com)
+
+API documentation:
+CARDS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BE
+USERS - https://documenter.getpostman.com/view/25008645/2s9YXcd5BL
