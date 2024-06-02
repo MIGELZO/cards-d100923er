@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import useForm from "../../forms/hooks/useForm";
 import Container from "@mui/material/Container";
 import useUsers from "../hooks/useUsers";
@@ -6,16 +6,16 @@ import editSchema from "../models/editSchema";
 import EditForm from "../components/EditForm";
 import initialEditForm from "../helpers/initialForms/initialEditForm";
 import userToModel from "../helpers/initialForms/userToModel";
-import { Navigate } from "react-router-dom";
 import ROUTES from "../../routs/routsModel";
 import { getUser } from "../services/localStorageService";
 import { useAlert } from "../../providers/AlertProvider";
+import { useNavigate } from "react-router-dom";
 
 export default function EditUserPage() {
   const { handleUpdateUser, handleGetUser } = useUsers();
+  const navigate = useNavigate();
+  const userRef = useRef(getUser());
 
-  const user = getUser();
-  if (!user) <Navigate replace to={ROUTES.ROOT} />;
   const {
     data,
     setData,
@@ -25,16 +25,21 @@ export default function EditUserPage() {
     validateForm,
     onSubmit,
   } = useForm(initialEditForm, editSchema, (newUser) => {
-    handleUpdateUser(user, newUser);
+    handleUpdateUser(userRef.current, newUser);
   });
   const { alertActivation } = useAlert();
 
   useEffect(() => {
-    handleGetUser(user._id).then((data) => {
-      const modelUser = userToModel(data);
-      setData(modelUser);
-    });
-  }, [handleGetUser, setData, user._id]);
+    const user = userRef.current;
+    if (user) {
+      handleGetUser(user._id).then((data) => {
+        const modelUser = userToModel(data);
+        setData(modelUser);
+      });
+    } else {
+      navigate(ROUTES.ROOT);
+    }
+  }, [handleGetUser, setData, navigate]);
 
   const confirmEdit = () => {
     onSubmit(onSubmit);
